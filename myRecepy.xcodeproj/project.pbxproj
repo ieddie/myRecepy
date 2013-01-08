@@ -1,0 +1,321 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8DDF6A74169B27BE002019C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A73169B27BE002019C0 /* UIKit.framework */; };
+		8DDF6A76169B27BE002019C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A75169B27BE002019C0 /* Foundation.framework */; };
+		8DDF6A78169B27BE002019C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A77169B27BE002019C0 /* CoreGraphics.framework */; };
+		8DDF6A7A169B27BE002019C0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A79169B27BE002019C0 /* CoreData.framework */; };
+		8DDF6A80169B27BE002019C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DDF6A7E169B27BE002019C0 /* InfoPlist.strings */; };
+		8DDF6A82169B27BE002019C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF6A81169B27BE002019C0 /* main.m */; };
+		8DDF6A86169B27BE002019C0 /* MAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF6A85169B27BE002019C0 /* MAppDelegate.m */; };
+		8DDF6A88169B27BE002019C0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DDF6A87169B27BE002019C0 /* Default.png */; };
+		8DDF6A8A169B27BE002019C0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DDF6A89169B27BE002019C0 /* Default@2x.png */; };
+		8DDF6A8C169B27BE002019C0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DDF6A8B169B27BE002019C0 /* Default-568h@2x.png */; };
+		8DDF6A8F169B27BE002019C0 /* myRecepy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF6A8D169B27BE002019C0 /* myRecepy.xcdatamodeld */; };
+		8DDF6A97169B27DF002019C0 /* MRecepy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF6A96169B27DE002019C0 /* MRecepy.m */; };
+		8DDF6A99169B63D9002019C0 /* MListOfIngridients.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DDF6A98169B63D9002019C0 /* MListOfIngridients.xib */; };
+		8DDF6A9C169B64A2002019C0 /* MIngredientsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF6A9B169B64A2002019C0 /* MIngredientsController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8DDF6A6F169B27BE002019C0 /* myRecepy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myRecepy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DDF6A73169B27BE002019C0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8DDF6A75169B27BE002019C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8DDF6A77169B27BE002019C0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8DDF6A79169B27BE002019C0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		8DDF6A7D169B27BE002019C0 /* myRecepy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "myRecepy-Info.plist"; sourceTree = "<group>"; };
+		8DDF6A7F169B27BE002019C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8DDF6A81169B27BE002019C0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8DDF6A83169B27BE002019C0 /* myRecepy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "myRecepy-Prefix.pch"; sourceTree = "<group>"; };
+		8DDF6A84169B27BE002019C0 /* MAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAppDelegate.h; sourceTree = "<group>"; };
+		8DDF6A85169B27BE002019C0 /* MAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAppDelegate.m; sourceTree = "<group>"; };
+		8DDF6A87169B27BE002019C0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		8DDF6A89169B27BE002019C0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		8DDF6A8B169B27BE002019C0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		8DDF6A8E169B27BE002019C0 /* myRecepy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myRecepy.xcdatamodel; sourceTree = "<group>"; };
+		8DDF6A95169B27DE002019C0 /* MRecepy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRecepy.h; sourceTree = "<group>"; };
+		8DDF6A96169B27DE002019C0 /* MRecepy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRecepy.m; sourceTree = "<group>"; };
+		8DDF6A98169B63D9002019C0 /* MListOfIngridients.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MListOfIngridients.xib; sourceTree = "<group>"; };
+		8DDF6A9A169B64A2002019C0 /* MIngredientsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIngredientsController.h; sourceTree = "<group>"; };
+		8DDF6A9B169B64A2002019C0 /* MIngredientsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIngredientsController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DDF6A6C169B27BE002019C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DDF6A74169B27BE002019C0 /* UIKit.framework in Frameworks */,
+				8DDF6A76169B27BE002019C0 /* Foundation.framework in Frameworks */,
+				8DDF6A78169B27BE002019C0 /* CoreGraphics.framework in Frameworks */,
+				8DDF6A7A169B27BE002019C0 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8DDF6A64169B27BE002019C0 = {
+			isa = PBXGroup;
+			children = (
+				8DDF6A7B169B27BE002019C0 /* myRecepy */,
+				8DDF6A72169B27BE002019C0 /* Frameworks */,
+				8DDF6A70169B27BE002019C0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8DDF6A70169B27BE002019C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DDF6A6F169B27BE002019C0 /* myRecepy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8DDF6A72169B27BE002019C0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8DDF6A73169B27BE002019C0 /* UIKit.framework */,
+				8DDF6A75169B27BE002019C0 /* Foundation.framework */,
+				8DDF6A77169B27BE002019C0 /* CoreGraphics.framework */,
+				8DDF6A79169B27BE002019C0 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8DDF6A7B169B27BE002019C0 /* myRecepy */ = {
+			isa = PBXGroup;
+			children = (
+				8DDF6A84169B27BE002019C0 /* MAppDelegate.h */,
+				8DDF6A85169B27BE002019C0 /* MAppDelegate.m */,
+				8DDF6A8D169B27BE002019C0 /* myRecepy.xcdatamodeld */,
+				8DDF6A7C169B27BE002019C0 /* Supporting Files */,
+				8DDF6A95169B27DE002019C0 /* MRecepy.h */,
+				8DDF6A96169B27DE002019C0 /* MRecepy.m */,
+				8DDF6A98169B63D9002019C0 /* MListOfIngridients.xib */,
+				8DDF6A9A169B64A2002019C0 /* MIngredientsController.h */,
+				8DDF6A9B169B64A2002019C0 /* MIngredientsController.m */,
+			);
+			path = myRecepy;
+			sourceTree = "<group>";
+		};
+		8DDF6A7C169B27BE002019C0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8DDF6A7D169B27BE002019C0 /* myRecepy-Info.plist */,
+				8DDF6A7E169B27BE002019C0 /* InfoPlist.strings */,
+				8DDF6A81169B27BE002019C0 /* main.m */,
+				8DDF6A83169B27BE002019C0 /* myRecepy-Prefix.pch */,
+				8DDF6A87169B27BE002019C0 /* Default.png */,
+				8DDF6A89169B27BE002019C0 /* Default@2x.png */,
+				8DDF6A8B169B27BE002019C0 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DDF6A6E169B27BE002019C0 /* myRecepy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DDF6A92169B27BE002019C0 /* Build configuration list for PBXNativeTarget "myRecepy" */;
+			buildPhases = (
+				8DDF6A6B169B27BE002019C0 /* Sources */,
+				8DDF6A6C169B27BE002019C0 /* Frameworks */,
+				8DDF6A6D169B27BE002019C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = myRecepy;
+			productName = myRecepy;
+			productReference = 8DDF6A6F169B27BE002019C0 /* myRecepy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8DDF6A66169B27BE002019C0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = M;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = Med;
+			};
+			buildConfigurationList = 8DDF6A69169B27BE002019C0 /* Build configuration list for PBXProject "myRecepy" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8DDF6A64169B27BE002019C0;
+			productRefGroup = 8DDF6A70169B27BE002019C0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DDF6A6E169B27BE002019C0 /* myRecepy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8DDF6A6D169B27BE002019C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DDF6A80169B27BE002019C0 /* InfoPlist.strings in Resources */,
+				8DDF6A88169B27BE002019C0 /* Default.png in Resources */,
+				8DDF6A8A169B27BE002019C0 /* Default@2x.png in Resources */,
+				8DDF6A8C169B27BE002019C0 /* Default-568h@2x.png in Resources */,
+				8DDF6A99169B63D9002019C0 /* MListOfIngridients.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DDF6A6B169B27BE002019C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DDF6A82169B27BE002019C0 /* main.m in Sources */,
+				8DDF6A86169B27BE002019C0 /* MAppDelegate.m in Sources */,
+				8DDF6A8F169B27BE002019C0 /* myRecepy.xcdatamodeld in Sources */,
+				8DDF6A97169B27DF002019C0 /* MRecepy.m in Sources */,
+				8DDF6A9C169B64A2002019C0 /* MIngredientsController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8DDF6A7E169B27BE002019C0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8DDF6A7F169B27BE002019C0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8DDF6A90169B27BE002019C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8DDF6A91169B27BE002019C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8DDF6A93169B27BE002019C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "myRecepy/myRecepy-Prefix.pch";
+				INFOPLIST_FILE = "myRecepy/myRecepy-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8DDF6A94169B27BE002019C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "myRecepy/myRecepy-Prefix.pch";
+				INFOPLIST_FILE = "myRecepy/myRecepy-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8DDF6A69169B27BE002019C0 /* Build configuration list for PBXProject "myRecepy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DDF6A90169B27BE002019C0 /* Debug */,
+				8DDF6A91169B27BE002019C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8DDF6A92169B27BE002019C0 /* Build configuration list for PBXNativeTarget "myRecepy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DDF6A93169B27BE002019C0 /* Debug */,
+				8DDF6A94169B27BE002019C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8DDF6A8D169B27BE002019C0 /* myRecepy.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8DDF6A8E169B27BE002019C0 /* myRecepy.xcdatamodel */,
+			);
+			currentVersion = 8DDF6A8E169B27BE002019C0 /* myRecepy.xcdatamodel */;
+			path = myRecepy.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 8DDF6A66169B27BE002019C0 /* Project object */;
+}
