@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Med. All rights reserved.
 //
 
-#import "MRecepy.h"
+#import "MRecipe.h"
 
 @interface MRecepy ()
 {
