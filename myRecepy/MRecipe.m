@@ -25,11 +25,20 @@
     return self;
 }
 
-
--(id) initWithname:(NSString*)name andIngredient:(NSString*) firstIngredient {
+-(id) initWithName:(NSString*)name Description:(NSString*)description {
     self = [super init];
     if(self) {
-        //[self setName:name];
+        [self setName:[NSString stringWithString:name]];
+        self.Description = description;
+        ingredients = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
+
+-(id) initWithName:(NSString*)name FirstIngredient:(NSString*) firstIngredient {
+    self = [super init];
+    if(self) {
         [self setName:[NSString stringWithString:name]];
         [ingredients addObject:[NSString stringWithString:firstIngredient]];
     }
@@ -71,6 +80,10 @@
         [NSException raise:@"Empty ingredient" format:@"Ingredient text is empty"];
     }
     [ingredients addObject:[NSString stringWithString:ingredientText]];
+}
+
+-(void) removeIngredientWithText:(NSString *)ingredientText {
+    [ingredients removeObjectIdenticalTo:ingredientText];
 }
 
 -(void) removeIngredientWithIndex:(NSInteger)index {

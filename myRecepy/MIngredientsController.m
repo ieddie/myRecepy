@@ -7,7 +7,7 @@
 //
 
 #import "MIngredientsController.h"
-#import "MRecepy.h"
+#import "MRecipe.h"
 
 @interface MIngredientsController ()
 {

@@ -11,9 +11,13 @@
 @interface MRecepy : NSObject
 
 -(id) initWithName:(NSString*)name;
--(id) initWithname:(NSString*)name andIngredient:(NSString*) firstIngredient;
+-(id) initWithName:(NSString*)name Description:(NSString*)description;
+-(id) initWithName:(NSString*)name FirstIngredient:(NSString*) firstIngredient;
 
-@property (strong, nonatomic) NSString* name;
+@property (nonatomic) NSInteger Id;
+@property (nonatomic) BOOL IsFavorite;
+@property (strong, nonatomic) NSString* Name;
+@property (strong, nonatomic) NSString* Description;
 
 -(NSInteger) getNumberOfIngridients;
 
