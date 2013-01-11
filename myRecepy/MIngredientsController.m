@@ -66,7 +66,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [recepy getIngredientAtIndex:indexPath.row];
+    cell.textLabel.text = [[recepy getIngredientAtIndex:indexPath.row] Ingredient];
     return cell;
 }
 

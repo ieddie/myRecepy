@@ -10,4 +10,7 @@
 
 @interface MIngredient : NSObject
 
+@property (strong, nonatomic) NSString* Ingredient;
+@property (strong, nonatomic) NSUUID* Id;
+
 @end

@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8DDF6A6E169B27BE002019C0"
                BuildableName = "myRecepy.app"
-               BlueprintName = "myRecepy"
-               ReferencedContainer = "container:myRecepy.xcodeproj">
+               BlueprintName = "myRecipeList"
+               ReferencedContainer = "container:myRecipeList.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8DDF6A6E169B27BE002019C0"
             BuildableName = "myRecepy.app"
-            BlueprintName = "myRecepy"
-            ReferencedContainer = "container:myRecepy.xcodeproj">
+            BlueprintName = "myRecipeList"
+            ReferencedContainer = "container:myRecipeList.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,8 +53,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8DDF6A6E169B27BE002019C0"
             BuildableName = "myRecepy.app"
-            BlueprintName = "myRecepy"
-            ReferencedContainer = "container:myRecepy.xcodeproj">
+            BlueprintName = "myRecipeList"
+            ReferencedContainer = "container:myRecipeList.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -71,8 +71,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8DDF6A6E169B27BE002019C0"
             BuildableName = "myRecepy.app"
-            BlueprintName = "myRecepy"
-            ReferencedContainer = "container:myRecepy.xcodeproj">
+            BlueprintName = "myRecipeList"
+            ReferencedContainer = "container:myRecipeList.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
