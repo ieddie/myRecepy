@@ -11,11 +11,11 @@
 
 @interface MMenu : NSObject
 
--(void) addRecipe:(MRecepy*) recipeToAdd;
+-(void) addRecipe:(MRecipe*) recipeToAdd;
 
 -(NSArray *) getRecipies;
--(MRecepy *) getRecipeById:(NSUUID *)Id;
--(MRecepy *) getRecipeByIndex:(NSInteger)Index;
+-(MRecipe *) getRecipeById:(NSUUID *)Id;
+-(MRecipe *) getRecipeByIndex:(NSInteger)Index;
 
 -(void) markIngredientAsBoughtWithId:(NSUUID*) Id;
 -(void) markIngredientAsBoughtWithNotBoughtIndex:(NSInteger) Index;

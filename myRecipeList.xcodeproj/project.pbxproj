@@ -7,8 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D4318EE16B22B7B00D0989C /* MRecipes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4318ED16B22B7B00D0989C /* MRecipes.m */; };
+		8D4318F116B22D0F00D0989C /* MRecipeWithIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4318F016B22D0F00D0989C /* MRecipeWithIngredients.m */; };
+		8D4318FA16B5EDD300D0989C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4318F916B5EDD200D0989C /* SenTestingKit.framework */; };
+		8D43190216B600C600D0989C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4318F916B5EDD200D0989C /* SenTestingKit.framework */; };
+		8D43190316B600C600D0989C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A73169B27BE002019C0 /* UIKit.framework */; };
+		8D43190416B600C600D0989C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A75169B27BE002019C0 /* Foundation.framework */; };
+		8D43190A16B600C700D0989C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D43190816B600C700D0989C /* InfoPlist.strings */; };
+		8D43190D16B600C700D0989C /* RecipeUnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D43190C16B600C700D0989C /* RecipeUnitTest.m */; };
+		8D43191416B6012200D0989C /* MDataBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D43191316B6012200D0989C /* MDataBaseTest.m */; };
 		8D7EBE81169FD74200819A4E /* MIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7EBE80169FD74200819A4E /* MIngredient.m */; };
 		8D7EBE85169FDCDB00819A4E /* MMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7EBE84169FDCDB00819A4E /* MMenu.m */; };
+		8DA7937916AAF360008120DF /* MMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7937816AAF360008120DF /* MMeasurement.m */; };
+		8DA7937E16AF91A6008120DF /* MIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7937D16AF91A6008120DF /* MIngredients.m */; };
+		8DA7938216AF92A1008120DF /* MDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7938116AF92A0008120DF /* MDatabase.m */; };
 		8DDF6A74169B27BE002019C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A73169B27BE002019C0 /* UIKit.framework */; };
 		8DDF6A76169B27BE002019C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A75169B27BE002019C0 /* Foundation.framework */; };
 		8DDF6A78169B27BE002019C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A77169B27BE002019C0 /* CoreGraphics.framework */; };
@@ -23,13 +35,49 @@
 		8DDF6A97169B27DF002019C0 /* MRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF6A96169B27DE002019C0 /* MRecipe.m */; };
 		8DDF6A99169B63D9002019C0 /* MListOfIngridients.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DDF6A98169B63D9002019C0 /* MListOfIngridients.xib */; };
 		8DDF6A9C169B64A2002019C0 /* MIngredientsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF6A9B169B64A2002019C0 /* MIngredientsController.m */; };
+		8DE62D0116AA52CF00932F5B /* Menus.sql in Resources */ = {isa = PBXBuildFile; fileRef = 8DE62D0016AA52CF00932F5B /* Menus.sql */; };
+		8DE62D0416AA5DCE00932F5B /* MIngredientWithAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE62D0316AA5DCE00932F5B /* MIngredientWithAmount.m */; };
+		8DE62D0716AA60D500932F5B /* MMeasurements.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE62D0616AA60D500932F5B /* MMeasurements.m */; };
+		8DF43F7216A2737E007E2C81 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DF43F7116A2737E007E2C81 /* libsqlite3.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		8D4318FB16B5EE5D00D0989C /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
-		8D7EBE7F169FD74200819A4E /* MIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIngredient.h; path = ../MIngredient.h; sourceTree = "<group>"; };
-		8D7EBE80169FD74200819A4E /* MIngredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIngredient.m; path = ../MIngredient.m; sourceTree = "<group>"; };
-		8D7EBE83169FDCDB00819A4E /* MMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMenu.h; path = ../MMenu.h; sourceTree = "<group>"; };
-		8D7EBE84169FDCDB00819A4E /* MMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMenu.m; path = ../MMenu.m; sourceTree = "<group>"; };
+		8D4318EC16B22B7B00D0989C /* MRecipes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRecipes.h; sourceTree = "<group>"; };
+		8D4318ED16B22B7B00D0989C /* MRecipes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRecipes.m; sourceTree = "<group>"; };
+		8D4318EF16B22D0F00D0989C /* MRecipeWithIngredients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRecipeWithIngredients.h; sourceTree = "<group>"; };
+		8D4318F016B22D0F00D0989C /* MRecipeWithIngredients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRecipeWithIngredients.m; sourceTree = "<group>"; };
+		8D4318F916B5EDD200D0989C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		8D43190116B600C600D0989C /* RecipeUnitTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeUnitTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D43190716B600C700D0989C /* RecipeUnitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RecipeUnitTest-Info.plist"; sourceTree = "<group>"; };
+		8D43190916B600C700D0989C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8D43190B16B600C700D0989C /* RecipeUnitTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecipeUnitTest.h; sourceTree = "<group>"; };
+		8D43190C16B600C700D0989C /* RecipeUnitTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecipeUnitTest.m; sourceTree = "<group>"; };
+		8D43190E16B600C700D0989C /* RecipeUnitTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RecipeUnitTest-Prefix.pch"; sourceTree = "<group>"; };
+		8D43191216B6012200D0989C /* MDataBaseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDataBaseTest.h; path = RecipeUnitTest/MDataBaseTest.h; sourceTree = "<group>"; };
+		8D43191316B6012200D0989C /* MDataBaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDataBaseTest.m; path = RecipeUnitTest/MDataBaseTest.m; sourceTree = "<group>"; };
+		8D7EBE7F169FD74200819A4E /* MIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIngredient.h; sourceTree = "<group>"; };
+		8D7EBE80169FD74200819A4E /* MIngredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIngredient.m; sourceTree = "<group>"; };
+		8D7EBE83169FDCDB00819A4E /* MMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMenu.h; sourceTree = "<group>"; };
+		8D7EBE84169FDCDB00819A4E /* MMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMenu.m; sourceTree = "<group>"; };
+		8DA7937716AAF360008120DF /* MMeasurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMeasurement.h; sourceTree = "<group>"; };
+		8DA7937816AAF360008120DF /* MMeasurement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMeasurement.m; sourceTree = "<group>"; };
+		8DA7937B16AF8CF1008120DF /* MEnumerations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MEnumerations.h; sourceTree = "<group>"; };
+		8DA7937C16AF91A6008120DF /* MIngredients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIngredients.h; sourceTree = "<group>"; };
+		8DA7937D16AF91A6008120DF /* MIngredients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIngredients.m; sourceTree = "<group>"; };
+		8DA7938016AF92A0008120DF /* MDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDatabase.h; sourceTree = "<group>"; };
+		8DA7938116AF92A0008120DF /* MDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDatabase.m; sourceTree = "<group>"; };
 		8DDF6A6F169B27BE002019C0 /* myRecipeList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myRecipeList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DDF6A73169B27BE002019C0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8DDF6A75169B27BE002019C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -45,18 +93,36 @@
 		8DDF6A89169B27BE002019C0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		8DDF6A8B169B27BE002019C0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8DDF6A8E169B27BE002019C0 /* myRecepy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myRecepy.xcdatamodel; sourceTree = "<group>"; };
-		8DDF6A95169B27DE002019C0 /* MRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRecipe.h; sourceTree = "<group>"; };
-		8DDF6A96169B27DE002019C0 /* MRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRecipe.m; sourceTree = "<group>"; };
+		8DDF6A95169B27DE002019C0 /* MRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRecipe.h; path = myRecepy/MRecipe.h; sourceTree = "<group>"; };
+		8DDF6A96169B27DE002019C0 /* MRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRecipe.m; path = myRecepy/MRecipe.m; sourceTree = "<group>"; };
 		8DDF6A98169B63D9002019C0 /* MListOfIngridients.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MListOfIngridients.xib; sourceTree = "<group>"; };
 		8DDF6A9A169B64A2002019C0 /* MIngredientsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIngredientsController.h; sourceTree = "<group>"; };
 		8DDF6A9B169B64A2002019C0 /* MIngredientsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIngredientsController.m; sourceTree = "<group>"; };
+		8DE62D0016AA52CF00932F5B /* Menus.sql */ = {isa = PBXFileReference; lastKnownFileType = file; name = Menus.sql; path = myRecepy/Menus.sql; sourceTree = "<group>"; };
+		8DE62D0216AA5DCE00932F5B /* MIngredientWithAmount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIngredientWithAmount.h; sourceTree = "<group>"; };
+		8DE62D0316AA5DCE00932F5B /* MIngredientWithAmount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIngredientWithAmount.m; sourceTree = "<group>"; };
+		8DE62D0516AA60D500932F5B /* MMeasurements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMeasurements.h; sourceTree = "<group>"; };
+		8DE62D0616AA60D500932F5B /* MMeasurements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMeasurements.m; sourceTree = "<group>"; };
+		8DF43F7116A2737E007E2C81 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8D4318FD16B600C600D0989C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D43190216B600C600D0989C /* SenTestingKit.framework in Frameworks */,
+				8D43190316B600C600D0989C /* UIKit.framework in Frameworks */,
+				8D43190416B600C600D0989C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DDF6A6C169B27BE002019C0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D4318FA16B5EDD300D0989C /* SenTestingKit.framework in Frameworks */,
+				8DF43F7216A2737E007E2C81 /* libsqlite3.dylib in Frameworks */,
 				8DDF6A74169B27BE002019C0 /* UIKit.framework in Frameworks */,
 				8DDF6A76169B27BE002019C0 /* Foundation.framework in Frameworks */,
 				8DDF6A78169B27BE002019C0 /* CoreGraphics.framework in Frameworks */,
@@ -67,10 +133,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D43190516B600C600D0989C /* RecipeUnitTest */ = {
+			isa = PBXGroup;
+			children = (
+				8D43190B16B600C700D0989C /* RecipeUnitTest.h */,
+				8D43190C16B600C700D0989C /* RecipeUnitTest.m */,
+				8D43190616B600C700D0989C /* Supporting Files */,
+			);
+			path = RecipeUnitTest;
+			sourceTree = "<group>";
+		};
+		8D43190616B600C700D0989C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8D43190716B600C700D0989C /* RecipeUnitTest-Info.plist */,
+				8D43190816B600C700D0989C /* InfoPlist.strings */,
+				8D43190E16B600C700D0989C /* RecipeUnitTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8D43191516B60FB500D0989C /* Unit tests */ = {
+			isa = PBXGroup;
+			children = (
+				8D43191216B6012200D0989C /* MDataBaseTest.h */,
+				8D43191316B6012200D0989C /* MDataBaseTest.m */,
+			);
+			name = "Unit tests";
+			sourceTree = "<group>";
+		};
 		8DDF6A64169B27BE002019C0 = {
 			isa = PBXGroup;
 			children = (
+				8D43191516B60FB500D0989C /* Unit tests */,
+				8DA7937B16AF8CF1008120DF /* MEnumerations.h */,
+				8DE62CFE16AA526F00932F5B /* Data */,
 				8DDF6A7B169B27BE002019C0 /* myRecipeList */,
+				8D43190516B600C600D0989C /* RecipeUnitTest */,
 				8DDF6A72169B27BE002019C0 /* Frameworks */,
 				8DDF6A70169B27BE002019C0 /* Products */,
 			);
@@ -80,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				8DDF6A6F169B27BE002019C0 /* myRecipeList.app */,
+				8D43190116B600C600D0989C /* RecipeUnitTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,6 +187,8 @@
 		8DDF6A72169B27BE002019C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D4318F916B5EDD200D0989C /* SenTestingKit.framework */,
+				8DF43F7116A2737E007E2C81 /* libsqlite3.dylib */,
 				8DDF6A73169B27BE002019C0 /* UIKit.framework */,
 				8DDF6A75169B27BE002019C0 /* Foundation.framework */,
 				8DDF6A77169B27BE002019C0 /* CoreGraphics.framework */,
@@ -98,16 +200,10 @@
 		8DDF6A7B169B27BE002019C0 /* myRecipeList */ = {
 			isa = PBXGroup;
 			children = (
-				8D7EBE83169FDCDB00819A4E /* MMenu.h */,
-				8D7EBE84169FDCDB00819A4E /* MMenu.m */,
-				8D7EBE7F169FD74200819A4E /* MIngredient.h */,
-				8D7EBE80169FD74200819A4E /* MIngredient.m */,
 				8DDF6A84169B27BE002019C0 /* MAppDelegate.h */,
 				8DDF6A85169B27BE002019C0 /* MAppDelegate.m */,
 				8DDF6A8D169B27BE002019C0 /* myRecepy.xcdatamodeld */,
 				8DDF6A7C169B27BE002019C0 /* Supporting Files */,
-				8DDF6A95169B27DE002019C0 /* MRecipe.h */,
-				8DDF6A96169B27DE002019C0 /* MRecipe.m */,
 				8DDF6A98169B63D9002019C0 /* MListOfIngridients.xib */,
 				8DDF6A9A169B64A2002019C0 /* MIngredientsController.h */,
 				8DDF6A9B169B64A2002019C0 /* MIngredientsController.m */,
@@ -130,9 +226,55 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8DE62CFE16AA526F00932F5B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8DA7937716AAF360008120DF /* MMeasurement.h */,
+				8DA7937816AAF360008120DF /* MMeasurement.m */,
+				8DE62D0516AA60D500932F5B /* MMeasurements.h */,
+				8DE62D0616AA60D500932F5B /* MMeasurements.m */,
+				8D7EBE7F169FD74200819A4E /* MIngredient.h */,
+				8D7EBE80169FD74200819A4E /* MIngredient.m */,
+				8DA7937C16AF91A6008120DF /* MIngredients.h */,
+				8DA7937D16AF91A6008120DF /* MIngredients.m */,
+				8DE62D0216AA5DCE00932F5B /* MIngredientWithAmount.h */,
+				8DE62D0316AA5DCE00932F5B /* MIngredientWithAmount.m */,
+				8DDF6A95169B27DE002019C0 /* MRecipe.h */,
+				8DDF6A96169B27DE002019C0 /* MRecipe.m */,
+				8D4318EF16B22D0F00D0989C /* MRecipeWithIngredients.h */,
+				8D4318F016B22D0F00D0989C /* MRecipeWithIngredients.m */,
+				8D4318EC16B22B7B00D0989C /* MRecipes.h */,
+				8D4318ED16B22B7B00D0989C /* MRecipes.m */,
+				8D7EBE83169FDCDB00819A4E /* MMenu.h */,
+				8D7EBE84169FDCDB00819A4E /* MMenu.m */,
+				8DA7938016AF92A0008120DF /* MDatabase.h */,
+				8DA7938116AF92A0008120DF /* MDatabase.m */,
+				8DE62D0016AA52CF00932F5B /* Menus.sql */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8D43190016B600C600D0989C /* RecipeUnitTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D43190F16B600C700D0989C /* Build configuration list for PBXNativeTarget "RecipeUnitTest" */;
+			buildPhases = (
+				8D4318FC16B600C600D0989C /* Sources */,
+				8D4318FD16B600C600D0989C /* Frameworks */,
+				8D4318FE16B600C600D0989C /* Resources */,
+				8D4318FF16B600C600D0989C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RecipeUnitTest;
+			productName = RecipeUnitTest;
+			productReference = 8D43190116B600C600D0989C /* RecipeUnitTest.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		8DDF6A6E169B27BE002019C0 /* myRecipeList */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DDF6A92169B27BE002019C0 /* Build configuration list for PBXNativeTarget "myRecipeList" */;
@@ -142,6 +284,7 @@
 				8DDF6A6D169B27BE002019C0 /* Resources */,
 			);
 			buildRules = (
+				8D4318FB16B5EE5D00D0989C /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -173,11 +316,20 @@
 			projectRoot = "";
 			targets = (
 				8DDF6A6E169B27BE002019C0 /* myRecipeList */,
+				8D43190016B600C600D0989C /* RecipeUnitTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8D4318FE16B600C600D0989C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D43190A16B600C700D0989C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DDF6A6D169B27BE002019C0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -187,12 +339,38 @@
 				8DDF6A8A169B27BE002019C0 /* Default@2x.png in Resources */,
 				8DDF6A8C169B27BE002019C0 /* Default-568h@2x.png in Resources */,
 				8DDF6A99169B63D9002019C0 /* MListOfIngridients.xib in Resources */,
+				8DE62D0116AA52CF00932F5B /* Menus.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8D4318FF16B600C600D0989C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		8D4318FC16B600C600D0989C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D43190D16B600C700D0989C /* RecipeUnitTest.m in Sources */,
+				8D43191416B6012200D0989C /* MDataBaseTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DDF6A6B169B27BE002019C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -204,12 +382,27 @@
 				8DDF6A9C169B64A2002019C0 /* MIngredientsController.m in Sources */,
 				8D7EBE81169FD74200819A4E /* MIngredient.m in Sources */,
 				8D7EBE85169FDCDB00819A4E /* MMenu.m in Sources */,
+				8DE62D0416AA5DCE00932F5B /* MIngredientWithAmount.m in Sources */,
+				8DE62D0716AA60D500932F5B /* MMeasurements.m in Sources */,
+				8DA7937916AAF360008120DF /* MMeasurement.m in Sources */,
+				8DA7937E16AF91A6008120DF /* MIngredients.m in Sources */,
+				8DA7938216AF92A1008120DF /* MDatabase.m in Sources */,
+				8D4318EE16B22B7B00D0989C /* MRecipes.m in Sources */,
+				8D4318F116B22D0F00D0989C /* MRecipeWithIngredients.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		8D43190816B600C700D0989C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8D43190916B600C700D0989C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		8DDF6A7E169B27BE002019C0 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -221,6 +414,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8D43191016B600C700D0989C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RecipeUnitTest/RecipeUnitTest-Prefix.pch";
+				INFOPLIST_FILE = "RecipeUnitTest/RecipeUnitTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		8D43191116B600C700D0989C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RecipeUnitTest/RecipeUnitTest-Prefix.pch";
+				INFOPLIST_FILE = "RecipeUnitTest/RecipeUnitTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		8DDF6A90169B27BE002019C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -277,6 +500,10 @@
 		8DDF6A93169B27BE002019C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "myRecepy/myRecipeList-Prefix.pch";
 				INFOPLIST_FILE = "myRecepy/myRecipeList-Info.plist";
@@ -288,6 +515,10 @@
 		8DDF6A94169B27BE002019C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "myRecepy/myRecipeList-Prefix.pch";
 				INFOPLIST_FILE = "myRecepy/myRecipeList-Info.plist";
@@ -299,6 +530,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8D43190F16B600C700D0989C /* Build configuration list for PBXNativeTarget "RecipeUnitTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D43191016B600C700D0989C /* Debug */,
+				8D43191116B600C700D0989C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		8DDF6A69169B27BE002019C0 /* Build configuration list for PBXProject "myRecipeList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

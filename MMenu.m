@@ -41,7 +41,7 @@
     [toBuyIngredients addObject:Id];
 }
 
--(void) addRecipe:(MRecepy*) recipeToAdd {
+-(void) addRecipe:(MRecipe*) recipeToAdd {
     if(recipeToAdd != nil) {
         [recipies addObject:recipeToAdd];
     }
@@ -51,7 +51,7 @@
     return [NSArray arrayWithArray:recipies];
 }
 
--(MRecepy *) getRecipeById:(NSUUID *)Id {
+-(MRecipe *) getRecipeById:(NSUUID *)Id {
     if (Id != nil) {
         // this will need to be reimplemented if we turn NSMutableArray into NSDictionary
         return nil;
@@ -61,7 +61,7 @@
     }
 }
 
--(MRecepy *) getRecipeByIndex:(NSInteger)Index {
+-(MRecipe *) getRecipeByIndex:(NSInteger)Index {
     return nil;
 }
 

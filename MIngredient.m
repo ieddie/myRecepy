@@ -10,4 +10,13 @@
 
 @implementation MIngredient
 
+- (id)initWithId:(NSInteger)ID Name:(NSString*)name {
+    self = [super init];
+    if(self) {
+        self.Id = ID;
+        self.IngredientName = name;
+    }
+    return self;
+}
+
 @end

@@ -1,17 +1,17 @@
 //
-//  MIngredient.h
-//  myRecepy
+//  MMeasurement.h
+//  myRecipeList
 //
-//  Created by Eduard Kantsevich on 1/11/13.
+//  Created by Eduard Kantsevich on 1/19/13.
 //  Copyright (c) 2013 Med. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface MIngredient : NSObject
+@interface MMeasurement : NSObject
 
-@property (strong, nonatomic) NSString* IngredientName;
 @property (nonatomic) NSInteger Id;
+@property (nonatomic) NSString* Name;
 
 - (id)initWithId:(NSInteger)ID Name:(NSString*)name;
 

@@ -8,10 +8,12 @@
 
 #import "MIngredientsController.h"
 #import "MRecipe.h"
+#import "MIngredientWithAmount.h"
+#import "MRecipeWithIngredients.h"
 
 @interface MIngredientsController ()
 {
-    MRecepy* recepy;
+    MRecipeWithIngredients* recipe;
     NSInteger counter;
     __weak IBOutlet UITableView *ingredienttable;
 }
@@ -23,7 +25,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        recepy = [[MRecepy alloc] initWithName:@"SomeRecepyName"];
+        recipe = [[MRecipeWithIngredients alloc] init];
         counter = 0;
     }
     return self;
@@ -42,8 +44,10 @@
 }
 
 - (IBAction)btnAddIngredient:(id)sender {
-    NSString* addIngridientWithText = [NSString stringWithFormat:@"%d", ++counter];
-    [recepy addIngredient:addIngridientWithText];
+    MIngredientWithAmount* ingredient = [[MIngredientWithAmount alloc] initWithIngredient:nil
+                                                                                   Amount:1.0
+                                                                              Measurement:[[MMeasurement alloc] initWithId:1 Name:@"Something"]];
+    [recipe addIngredient:ingredient];
     [ingredienttable reloadData];
 }
 
@@ -54,7 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [recepy getNumberOfIngridients];
+    return [recipe getNumberOfIngridients];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,7 +70,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [[recepy getIngredientAtIndex:indexPath.row] Ingredient];
+    cell.textLabel.text = [[[recipe getIngredientAtIndex:indexPath.row] Ingredient] IngredientName];
     return cell;
 }
 

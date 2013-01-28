@@ -8,6 +8,10 @@
 
 #import "MAppDelegate.h"
 #import "MIngredientsController.h"
+#import "MMeasurements.h"
+
+// temp
+#import "MEnumerations.h"
 
 @implementation MAppDelegate
 
@@ -27,6 +31,11 @@
     [navigationController setNavigationBarHidden:YES];
     self.window.rootViewController = navigationController;
     
+    NSArray* measurements = [[MMeasurements Instance] currentMeasurements];
+    NSLog(@"%@", [measurements description]);
+    
+    MResultCode result = [[MMeasurements Instance] addNewMeasurement:@"cup(s)"];
+    NSLog(@"%d", result);
     return YES;
 }
 
@@ -144,8 +153,6 @@
     
     return _persistentStoreCoordinator;
 }
-
-#pragma mark - Application's Documents directory
 
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory
