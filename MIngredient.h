@@ -10,8 +10,8 @@
 
 @interface MIngredient : NSObject
 
-@property (strong, nonatomic) NSString* IngredientName;
 @property (nonatomic) NSInteger Id;
+@property (strong, nonatomic) NSString* Name;
 
 - (id)initWithId:(NSInteger)ID Name:(NSString*)name;
 

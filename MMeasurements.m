@@ -1,4 +1,4 @@
-//
+ //
 //  MMeasurements.m
 //  myRecipeList
 //
@@ -32,7 +32,7 @@ static NSString *insertNewQuery = @"Insert into measurements (name) values (?)";
 {
     self = [super init];
     if(self) {
-        sqlite3* databaseLocal = [self openDBConnection];
+        sqlite3* databaseLocal = [MDatabase OpenDbConnection];
         if(databaseLocal != nil)
         {
             [self readAllMeasurementsfromDB:databaseLocal];
@@ -42,7 +42,7 @@ static NSString *insertNewQuery = @"Insert into measurements (name) values (?)";
     return self;
 }
 
-- (int) readAllMeasurementsfromDB:(sqlite3*) databaseLocal
+- (MResultCode) readAllMeasurementsfromDB:(sqlite3*) databaseLocal
 {
     sqlite3_stmt *statement;
     
@@ -50,7 +50,7 @@ static NSString *insertNewQuery = @"Insert into measurements (name) values (?)";
     if(resultCode != SQLITE_OK)
     {
         NSLog(@"Failed to prepare SQLite statement for get all measurements. Error code %d", resultCode);
-        return resultCode;
+        return GenericDBError;
     }
 
     // create an temporary array to hold incoming measurements
@@ -72,14 +72,15 @@ static NSString *insertNewQuery = @"Insert into measurements (name) values (?)";
     {
         // something went wrong during sql query
         NSLog(@"Error during fninlizing get all measurements statement: %d", resultCode);
+        return GenericDBError;
     }
-    return resultCode;
+    return Success;
 }
 
 - (MResultCode) addNewMeasurement:(NSString *) measurement
 {
     MResultCode result = GenericDBError;
-    sqlite3* databaseLocal = [self openDBConnection];
+    sqlite3* databaseLocal = [MDatabase OpenDbConnection];
     if(databaseLocal != nil)
     {
         int addResult = [self addNewMeasurement:measurement ToDB:databaseLocal];
@@ -133,19 +134,6 @@ static NSString *insertNewQuery = @"Insert into measurements (name) values (?)";
         NSLog(@"Error during finilizing add new measurements statement: %d", resultCode);
     }
     return resultCode;
-}
-
--(sqlite3*) openDBConnection
-{
-    sqlite3* database;
-    NSInteger openCode = sqlite3_open([[MDatabase Path] UTF8String], &database);
-    if (openCode != SQLITE_OK )
-    {
-        sqlite3_close(database);
-        NSLog(@"Database failed to open. Error code %d", openCode);
-        return nil;
-    }
-    return database;
 }
 
 @end

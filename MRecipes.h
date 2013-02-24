@@ -12,17 +12,21 @@
 #import "MRecipeWithIngredients.h"
 #import "MEnumerations.h"
 #import "MDatabase.h"
+#import "MIngredient.h"
 
 @interface MRecipes : NSObject
 + (MRecipes *)Instance;
 
-@property (readonly, strong, nonatomic) NSArray* currentRecipes;
+@property (readonly, strong, nonatomic) NSArray* AvailableRecipes;
 
-- (MRecipeWithIngredients*) getRecipeWithIngredientForId:(NSInteger)recipeId;
-- (MResultCode) addBlankRecipe:(MRecipe *) newRecipe;
-- (MResultCode) addRecipeWithIngredients:(MRecipeWithIngredients *)newRecipeWithIngredients;
-- (MResultCode) addIngredient:(MIngredientWithAmount *)newIngredient toRecipeWithId:(NSInteger) recipeId;
-- (MResultCode) removeIngredientWithIndex:(NSInteger *)ingredientIndex fromRecipeWithId:(NSInteger) recipeId;
+- (MRecipeWithIngredients*) getRecipeWithIngredientsForId:(NSInteger)recipeId;
+
+- (MResultCode) addNewRecipe:(MRecipe *)recipeToAdd;
+- (BOOL) updateRecipe:(MRecipe*) recipeToUpdate;
+- (BOOL) removeRecipe:(NSInteger)recipeToRemove;
+
+- (MRecipeWithIngredients*) addIngredient:(MIngredientWithAmount *)newIngredient toRecipeWithId:(NSInteger) recipeId;
+- (MRecipeWithIngredients*) removeIngredientWithId:(NSInteger *)ingredientId fromRecipeWithId:(NSInteger) recipeId;
 
 - (MResultCode) markRecipeAsFavorite:(NSInteger) recipeId;
 - (MResultCode) unmarkRecipeAsFavorite:(NSInteger) recipeId;

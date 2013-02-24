@@ -16,7 +16,7 @@
 -(id) initWithIngredient:(MIngredient*)ingredient Amount:(float)amount Measurement:(MMeasurement *)measurementId;
 
 @property (strong, nonatomic) MIngredient* Ingredient;
-@property (nonatomic) float Amount;
+@property (nonatomic) double Amount;
 @property (strong, nonatomic) MMeasurement* Measurement;
 
 @end

@@ -8,32 +8,19 @@
 
 #import "MRecipe.h"
 
-
-
 @implementation MRecipe
 
--(id) initWithName:(NSString*)name {
+-(id) initWithId:(NSInteger)Id Name:(NSString*)name Description:(NSString*)description IsFavorite:(NSInteger) isFavorite{
     self = [super init];
     if(self) {
+        [self setId:Id];
         [self setName:[NSString stringWithString:name]];
-    }
-    return self;
-}
-
--(id) initWithName:(NSString*)name Description:(NSString*)description {
-    self = [super init];
-    if(self) {
-        [self setName:[NSString stringWithString:name]];
-        self.Description = description;
-    }
-    return self;
-}
-
-
--(id) initWithName:(NSString*)name FirstIngredient:(NSString*) firstIngredient {
-    self = [super init];
-    if(self) {
-        [self setName:[NSString stringWithString:name]];
+        [self setDescription:[NSString stringWithString:description]];
+        BOOL isFavoriteBool = TRUE;
+        if (isFavorite != 1) {
+            isFavorite = FALSE;
+        }
+        [self setIsFavorite:isFavoriteBool];
     }
     return self;
 }

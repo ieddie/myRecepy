@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		8D4318EE16B22B7B00D0989C /* MRecipes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4318ED16B22B7B00D0989C /* MRecipes.m */; };
 		8D4318F116B22D0F00D0989C /* MRecipeWithIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4318F016B22D0F00D0989C /* MRecipeWithIngredients.m */; };
-		8D4318FA16B5EDD300D0989C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4318F916B5EDD200D0989C /* SenTestingKit.framework */; };
 		8D43190216B600C600D0989C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4318F916B5EDD200D0989C /* SenTestingKit.framework */; };
 		8D43190316B600C600D0989C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A73169B27BE002019C0 /* UIKit.framework */; };
 		8D43190416B600C600D0989C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A75169B27BE002019C0 /* Foundation.framework */; };
 		8D43190A16B600C700D0989C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D43190816B600C700D0989C /* InfoPlist.strings */; };
 		8D43190D16B600C700D0989C /* RecipeUnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D43190C16B600C700D0989C /* RecipeUnitTest.m */; };
-		8D43191416B6012200D0989C /* MDataBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D43191316B6012200D0989C /* MDataBaseTest.m */; };
+		8D43191616B61E4F00D0989C /* MMeasurements.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE62D0616AA60D500932F5B /* MMeasurements.m */; };
+		8D43191716B61E6C00D0989C /* MDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7938116AF92A0008120DF /* MDatabase.m */; };
+		8D43191816B61F0D00D0989C /* MMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7937816AAF360008120DF /* MMeasurement.m */; };
+		8D43191A16B61F2700D0989C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D43191916B61F2700D0989C /* libsqlite3.0.dylib */; };
+		8D43191B16B6371A00D0989C /* Menus.sql in Resources */ = {isa = PBXBuildFile; fileRef = 8DE62D0016AA52CF00932F5B /* Menus.sql */; };
 		8D7EBE81169FD74200819A4E /* MIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7EBE80169FD74200819A4E /* MIngredient.m */; };
 		8D7EBE85169FDCDB00819A4E /* MMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7EBE84169FDCDB00819A4E /* MMenu.m */; };
 		8DA7937916AAF360008120DF /* MMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7937816AAF360008120DF /* MMeasurement.m */; };
@@ -65,8 +68,7 @@
 		8D43190B16B600C700D0989C /* RecipeUnitTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecipeUnitTest.h; sourceTree = "<group>"; };
 		8D43190C16B600C700D0989C /* RecipeUnitTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecipeUnitTest.m; sourceTree = "<group>"; };
 		8D43190E16B600C700D0989C /* RecipeUnitTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RecipeUnitTest-Prefix.pch"; sourceTree = "<group>"; };
-		8D43191216B6012200D0989C /* MDataBaseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDataBaseTest.h; path = RecipeUnitTest/MDataBaseTest.h; sourceTree = "<group>"; };
-		8D43191316B6012200D0989C /* MDataBaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDataBaseTest.m; path = RecipeUnitTest/MDataBaseTest.m; sourceTree = "<group>"; };
+		8D43191916B61F2700D0989C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		8D7EBE7F169FD74200819A4E /* MIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIngredient.h; sourceTree = "<group>"; };
 		8D7EBE80169FD74200819A4E /* MIngredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIngredient.m; sourceTree = "<group>"; };
 		8D7EBE83169FDCDB00819A4E /* MMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMenu.h; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D43191A16B61F2700D0989C /* libsqlite3.0.dylib in Frameworks */,
 				8D43190216B600C600D0989C /* SenTestingKit.framework in Frameworks */,
 				8D43190316B600C600D0989C /* UIKit.framework in Frameworks */,
 				8D43190416B600C600D0989C /* Foundation.framework in Frameworks */,
@@ -121,7 +124,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D4318FA16B5EDD300D0989C /* SenTestingKit.framework in Frameworks */,
 				8DF43F7216A2737E007E2C81 /* libsqlite3.dylib in Frameworks */,
 				8DDF6A74169B27BE002019C0 /* UIKit.framework in Frameworks */,
 				8DDF6A76169B27BE002019C0 /* Foundation.framework in Frameworks */,
@@ -153,19 +155,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8D43191516B60FB500D0989C /* Unit tests */ = {
-			isa = PBXGroup;
-			children = (
-				8D43191216B6012200D0989C /* MDataBaseTest.h */,
-				8D43191316B6012200D0989C /* MDataBaseTest.m */,
-			);
-			name = "Unit tests";
-			sourceTree = "<group>";
-		};
 		8DDF6A64169B27BE002019C0 = {
 			isa = PBXGroup;
 			children = (
-				8D43191516B60FB500D0989C /* Unit tests */,
+				8D43191916B61F2700D0989C /* libsqlite3.0.dylib */,
 				8DA7937B16AF8CF1008120DF /* MEnumerations.h */,
 				8DE62CFE16AA526F00932F5B /* Data */,
 				8DDF6A7B169B27BE002019C0 /* myRecipeList */,
@@ -326,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D43191B16B6371A00D0989C /* Menus.sql in Resources */,
 				8D43190A16B600C700D0989C /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,8 +360,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D43191816B61F0D00D0989C /* MMeasurement.m in Sources */,
+				8D43191716B61E6C00D0989C /* MDatabase.m in Sources */,
+				8D43191616B61E4F00D0989C /* MMeasurements.m in Sources */,
 				8D43190D16B600C700D0989C /* RecipeUnitTest.m in Sources */,
-				8D43191416B6012200D0989C /* MDataBaseTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,6 +533,7 @@
 				8D43191116B600C700D0989C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8DDF6A69169B27BE002019C0 /* Build configuration list for PBXProject "myRecipeList" */ = {
 			isa = XCConfigurationList;

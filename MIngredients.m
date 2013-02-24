@@ -18,6 +18,7 @@ static MIngredients* sharedSingleton = nil;
 
 static NSString *selectAllQuery = @"SELECT id, name FROM ingredients";
 static NSString *insertNewQuery = @"Insert into ingredients (name) values (?)";
+static NSString *updateExistingQuery = @"Update ingredients set name=? where id=?NNN";
 
 + (MIngredients *)Instance;
 {
@@ -32,14 +33,17 @@ static NSString *insertNewQuery = @"Insert into ingredients (name) values (?)";
 {
     self = [super init];
     if(self) {
-        sqlite3* databaseLocal = [self openDBConnection];
+        sqlite3* databaseLocal = [MDatabase OpenDbConnection];
         if(databaseLocal != nil)
         {
-            [self readAllIngredientsfromDB:databaseLocal];
+            int resultCode = [self readAllIngredientsfromDB:databaseLocal];
+            sqlite3_close(databaseLocal);
+            if(resultCode == SQLITE_OK) {
+                return self;
+            }
         }
-        sqlite3_close(databaseLocal);
     }
-    return self;
+    return nil;
 }
 
 - (int) readAllIngredientsfromDB:(sqlite3*) databaseLocal
@@ -79,7 +83,7 @@ static NSString *insertNewQuery = @"Insert into ingredients (name) values (?)";
 - (MResultCode) addNewIngredient:(NSString *) ingredientText
 {
     MResultCode result = GenericDBError;
-    sqlite3* databaseLocal = [self openDBConnection];
+    sqlite3* databaseLocal = [MDatabase OpenDbConnection];
     if(databaseLocal != nil)
     {
         int addResult = [self addNewIngredient:ingredientText ToDB:databaseLocal];
@@ -100,7 +104,7 @@ static NSString *insertNewQuery = @"Insert into ingredients (name) values (?)";
     return result;
 }
 
-- (int) addNewIngredient:(NSString*)measurement ToDB:(sqlite3*)databaseLocal
+- (int) addNewIngredient:(NSString*)ingredientText ToDB:(sqlite3*)databaseLocal
 {
     sqlite3_stmt *statement;
     
@@ -111,7 +115,7 @@ static NSString *insertNewQuery = @"Insert into ingredients (name) values (?)";
         return resultCode;
     }
     
-    resultCode = sqlite3_bind_text(statement, 1, [measurement UTF8String], -1, SQLITE_TRANSIENT);
+    resultCode = sqlite3_bind_text(statement, 1, [ingredientText UTF8String], -1, SQLITE_TRANSIENT);
     if(resultCode != SQLITE_OK)
     {
         NSLog(@"Failed to bind the parameter to SQLite statement for add new ingredient. Error code %d", resultCode);
@@ -135,16 +139,72 @@ static NSString *insertNewQuery = @"Insert into ingredients (name) values (?)";
     return resultCode;
 }
 
--(sqlite3*) openDBConnection
+- (MResultCode) updateExistingIngredientAtId:(NSInteger)ingredientId withText:(NSString *)newIngredientName
 {
-    sqlite3* database;
-    NSInteger openCode = sqlite3_open([[MDatabase Path] UTF8String], &database);
-    if (openCode != SQLITE_OK )
+    MResultCode result = GenericDBError;
+    sqlite3* databaseLocal = [MDatabase OpenDbConnection];
+    if(databaseLocal != nil)
     {
-        sqlite3_close(database);
-        NSLog(@"Database failed to open. Error code %d", openCode);
-        return nil;
+        int addResult = [self updateIngredientAtId:ingredientId WithText:newIngredientName InDB:databaseLocal];
+        if(addResult != SQLITE_OK)
+        {
+            if(addResult == SQLITE_CONSTRAINT)
+            {
+                result = ContraintViolation;
+            }
+        }
+        else
+        {
+            [self readAllIngredientsfromDB:databaseLocal];
+            result = Success;
+        }
     }
-    return database;
+    sqlite3_close(databaseLocal);
+    return result;
 }
+
+- (int) updateIngredientAtId:(NSInteger)ingredientId WithText:(NSString*)ingredientText InDB:(sqlite3*)databaseLocal
+{
+    sqlite3_stmt *statement;
+    
+    int resultCode = sqlite3_prepare_v2(databaseLocal, [updateExistingQuery UTF8String], -1, &statement, nil);
+    if(resultCode != SQLITE_OK)
+    {
+        NSLog(@"Failed to prepare SQLite statement for update existing ingredient. Error code %d", resultCode);
+        return resultCode;
+    }
+    
+    resultCode = sqlite3_bind_text(statement, 1, [ingredientText UTF8String], -1, SQLITE_TRANSIENT);
+    if(resultCode != SQLITE_OK)
+    {
+        NSLog(@"Failed to bind the text parameter to SQLite statement for update ingredient. Error code %d", resultCode);
+        return resultCode;
+    }
+    
+    resultCode = sqlite3_bind_int(statement, 2, ingredientId);
+    if(resultCode != SQLITE_OK)
+    {
+        NSLog(@"Failed to bind the text parameter to SQLite statement for update ingredient. Error code %d", resultCode);
+        return resultCode;
+    }
+    
+    resultCode = sqlite3_step(statement);
+    if(resultCode != SQLITE_DONE)
+    {
+        NSLog(@"Result code for execution of add new ingredient was %d", resultCode);
+        return resultCode;
+    }
+    
+    // finalize (close) the sqlite statement
+    resultCode = sqlite3_finalize(statement);
+    if(resultCode != SQLITE_OK)
+    {
+        // something went wrong during sql query
+        NSLog(@"Error during finilizing add new ingredient statement: %d", resultCode);
+    }
+    return resultCode;
+}
+
+
+
 @end

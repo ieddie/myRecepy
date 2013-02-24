@@ -13,20 +13,56 @@
 - (void)setUp
 {
     [super setUp];
-    
-    // Set-up code here.
 }
 
 - (void)tearDown
 {
-    // Tear-down code here.
-    
     [super tearDown];
 }
 
-- (void)testExample
-{
-    STFail(@"Unit tests are not implemented yet in RecipeUnitTest");
+- (void)testAddMesurement {
+    NSString* measurementToAdd =@"chashka";
+    [[MMeasurements Instance] addNewMeasurement:measurementToAdd];
+    NSArray* curMeasurements = [[MMeasurements Instance] availableMeasurements];
+    NSInteger length = [curMeasurements count];
+    BOOL found = false;
+    for (NSInteger i =0; i < length; ++i) {
+        MMeasurement* measurement = [curMeasurements objectAtIndex:i];
+        if ([[measurement Name] isEqualToString:measurementToAdd]) {
+            found = TRUE;
+        }
+    }
+    STAssertTrue(found, @"Added measurement wasn't found");
+}
+
+- (void)testGetMesurement {
+    NSString* measurementToAdd =@"chashka";
+    [[MMeasurements Instance] addNewMeasurement:measurementToAdd];
+    NSArray* curMeasurements = [[MMeasurements Instance] availableMeasurements];
+    NSInteger length = [curMeasurements count];
+    BOOL found = false;
+    for (NSInteger i =0; i < length; ++i) {
+        MMeasurement* measurement = [curMeasurements objectAtIndex:i];
+        if ([[measurement Name] isEqualToString:measurementToAdd]) {
+            found = TRUE;
+        }
+    }
+    STAssertTrue(found, @"Added measurement wasn't found");
+}
+
+- (void)testGetIngredients {
+    NSString* measurementToAdd =@"chashka";
+    [[MMeasurements Instance] addNewMeasurement:measurementToAdd];
+    NSArray* curMeasurements = [[MMeasurements Instance] availableMeasurements];
+    NSInteger length = [curMeasurements count];
+    BOOL found = false;
+    for (NSInteger i =0; i < length; ++i) {
+        MMeasurement* measurement = [curMeasurements objectAtIndex:i];
+        if ([[measurement Name] isEqualToString:measurementToAdd]) {
+            found = TRUE;
+        }
+    }
+    STAssertTrue(found, @"Added measurement wasn't found");
 }
 
 @end

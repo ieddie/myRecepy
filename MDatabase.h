@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "sqlite3.h"
 
 @interface MDatabase : NSObject
 + (NSString*) Path;
++ (sqlite3*) OpenDbConnection;
+
 @end

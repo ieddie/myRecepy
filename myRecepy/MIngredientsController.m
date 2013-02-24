@@ -58,7 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [recipe getNumberOfIngridients];
+    return [recipe IngridientsCount];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -70,7 +70,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [[[recipe getIngredientAtIndex:indexPath.row] Ingredient] IngredientName];
+    cell.textLabel.text = [[[recipe IngredientWithAmountAtIndex:indexPath.row] Ingredient] Name];
     return cell;
 }
 

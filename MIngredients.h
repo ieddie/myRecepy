@@ -15,9 +15,10 @@
 @interface MIngredients : NSObject
 + (MIngredients *)Instance;
 
-@property (readonly, strong, nonatomic) NSArray* currentIngredients;
+@property (readonly, strong, nonatomic) NSArray* availableIngredients;
 
 - (MResultCode) addNewIngredient:(NSString *) ingredientText;
+- (MResultCode) updateExistingIngredientAtId:(NSInteger) ingredientId withText:(NSString *)newIngredientName;
 
 @end
 

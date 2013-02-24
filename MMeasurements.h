@@ -14,7 +14,7 @@
 @interface MMeasurements : NSObject
 + (MMeasurements *)Instance;
 
-@property (readonly, strong, nonatomic) NSArray* currentMeasurements;
+@property (readonly, strong, nonatomic) NSArray* availableMeasurements;
 
 - (MResultCode) addNewMeasurement:(NSString *) measurement;
 

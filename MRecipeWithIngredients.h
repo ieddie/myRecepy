@@ -14,10 +14,10 @@
 
 @property (strong, nonatomic) MRecipe* recipe;
 
--(NSInteger) getNumberOfIngridients;
+-(NSInteger) IngridientsCount;
 
--(NSArray *) getCurrentIngredients;
--(MIngredientWithAmount*) getIngredientAtIndex:(NSInteger) index;
+-(NSArray *) Ingredients;
+-(MIngredientWithAmount*) IngredientWithAmountAtIndex:(NSInteger) index;
 
 -(void) addIngredient:(MIngredientWithAmount *)newIngredient;
 

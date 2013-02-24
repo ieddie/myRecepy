@@ -7,6 +7,7 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "MMeasurements.h"
 
 @interface RecipeUnitTest : SenTestCase
 

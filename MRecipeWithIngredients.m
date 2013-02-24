@@ -10,36 +10,36 @@
 
 @interface MRecipeWithIngredients ()
 {
-    NSMutableArray* ingredients;
+    NSMutableArray* ingredientsWithAmount;
 }
 @end
 
 @implementation MRecipeWithIngredients
 
 // return non-muable version of curent list of ingredients
--(NSArray *) getCurrentIngredients {
-    if(ingredients) {
-        return [NSArray arrayWithArray:ingredients];
+-(NSArray *) Ingredients {
+    if(ingredientsWithAmount) {
+        return [NSArray arrayWithArray:ingredientsWithAmount];
     }
     else {
         return nil;
     }
 }
 
--(MIngredientWithAmount*) getIngredientAtIndex:(NSInteger) index {
-    NSInteger length = [ingredients count];
-    if(length <= index) {
+-(MIngredientWithAmount*) IngredientWithAmountAtIndex:(NSInteger) index {
+    NSInteger count = [ingredientsWithAmount count];
+    if(count <= index) {
         // no such index exists
         return nil;
     }
     else {
-        return [ingredients objectAtIndex:index];
+        return (MIngredientWithAmount *)[ingredientsWithAmount objectAtIndex:index];
     }
 }
 
--(NSInteger) getNumberOfIngridients {
-    if(ingredients) {
-        return [ingredients count];
+-(NSInteger) IngridientsCount {
+    if(ingredientsWithAmount) {
+        return [ingredientsWithAmount count];
     }
     else {
         return 0;
@@ -50,16 +50,16 @@
     if (ingredient == nil) {
         [NSException raise:@"Empty ingredient" format:@"Ingredient is empty"];
     }
-    [ingredients addObject:ingredient];
+    [ingredientsWithAmount addObject:ingredient];
 }
 
 -(void) removeIngredientWithIndex:(NSInteger)index {
-    NSInteger length = [ingredients count];
+    NSInteger length = [ingredientsWithAmount count];
     if(length <= index) {
         // no such index exists
     }
     else {
-        [ingredients removeObjectAtIndex:index];
+        [ingredientsWithAmount removeObjectAtIndex:index];
     }
 }
 

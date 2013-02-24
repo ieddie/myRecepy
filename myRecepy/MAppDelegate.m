@@ -31,7 +31,7 @@
     [navigationController setNavigationBarHidden:YES];
     self.window.rootViewController = navigationController;
     
-    NSArray* measurements = [[MMeasurements Instance] currentMeasurements];
+    NSArray* measurements = [[MMeasurements Instance] availableMeasurements];
     NSLog(@"%@", [measurements description]);
     
     MResultCode result = [[MMeasurements Instance] addNewMeasurement:@"cup(s)"];

@@ -8,14 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "MRecipe.h"
+#import "MRecipeWithIngredients.h"
 
 @interface MMenu : NSObject
 
 -(void) addRecipe:(MRecipe*) recipeToAdd;
 
 -(NSArray *) getRecipies;
--(MRecipe *) getRecipeById:(NSUUID *)Id;
--(MRecipe *) getRecipeByIndex:(NSInteger)Index;
+-(MRecipeWithIngredients *) getRecipeWithIngredientsById:(NSInteger)Id;
+-(MRecipeWithIngredients *) getRecipeByIndex:(NSInteger)Index;
 
 -(void) markIngredientAsBoughtWithId:(NSUUID*) Id;
 -(void) markIngredientAsBoughtWithNotBoughtIndex:(NSInteger) Index;

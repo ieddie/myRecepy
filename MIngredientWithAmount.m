@@ -10,7 +10,7 @@
 
 @implementation MIngredientWithAmount
 
--(id) initWithIngredient:(MIngredient*)ingredient Amount:(float)amount Measurement:(MMeasurement *) measurement
+-(id) initWithIngredient:(MIngredient*)ingredient Amount:(double)amount Measurement:(MMeasurement *) measurement
 {
     self = [super init];
     if (self) {
