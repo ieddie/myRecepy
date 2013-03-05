@@ -13,7 +13,7 @@
 
 @interface MIngredientWithAmount : NSObject
 
--(id) initWithIngredient:(MIngredient*)ingredient Amount:(float)amount Measurement:(MMeasurement *)measurementId;
+-(id) initWithIngredient:(MIngredient*)ingredient Amount:(double)amount Measurement:(MMeasurement *)measurementId;
 
 @property (strong, nonatomic) MIngredient* Ingredient;
 @property (nonatomic) double Amount;

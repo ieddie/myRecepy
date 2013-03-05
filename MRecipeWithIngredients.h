@@ -12,7 +12,9 @@
 
 @interface MRecipeWithIngredients : NSObject
 
-@property (strong, nonatomic) MRecipe* recipe;
+@property (strong, nonatomic) MRecipe* RecipeDetails;
+
+-(id) initWithRecipeDetails:(MRecipe*) recipeDetails;
 
 -(NSInteger) IngridientsCount;
 

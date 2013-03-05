@@ -16,6 +16,17 @@
 
 @implementation MRecipeWithIngredients
 
+-(id) initWithRecipeDetails:(MRecipe *)recipeDetails
+{
+    self = [super init];
+    if(self) {
+        self.RecipeDetails = recipeDetails;
+        self->ingredientsWithAmount = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
+
 // return non-muable version of curent list of ingredients
 -(NSArray *) Ingredients {
     if(ingredientsWithAmount) {

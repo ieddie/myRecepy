@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MIngredients.h"
+#import "MIngredientsController.h"
 
-@interface MIngredientController : UIViewController
-
+@interface MIngredientController : UIViewController <UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *IngredientName;
+@property (strong, nonatomic) id delegate;
 @end

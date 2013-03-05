@@ -10,7 +10,7 @@
 #import "MDatabase.h"
 
 @interface MMeasurements()
-@property (readwrite, strong, nonatomic) NSArray* currentMeasurements;
+@property (readwrite, strong, nonatomic) NSArray* availableMeasurements;
 @end
 
 @implementation MMeasurements
@@ -64,7 +64,7 @@ static NSString *insertNewQuery = @"Insert into measurements (name) values (?)";
     }
     
     // now populate ivar with temporary array
-    self.currentMeasurements = [NSArray arrayWithArray:allMeasurements];
+    self.availableMeasurements = [NSArray arrayWithArray:allMeasurements];
     
     // finalize (close) the sqlite statement
     resultCode = sqlite3_finalize(statement);

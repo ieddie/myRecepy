@@ -18,7 +18,7 @@
         [self setDescription:[NSString stringWithString:description]];
         BOOL isFavoriteBool = TRUE;
         if (isFavorite != 1) {
-            isFavorite = FALSE;
+            isFavoriteBool = FALSE;
         }
         [self setIsFavorite:isFavoriteBool];
     }

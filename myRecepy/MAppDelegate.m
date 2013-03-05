@@ -9,6 +9,7 @@
 #import "MAppDelegate.h"
 #import "MIngredientsController.h"
 #import "MMeasurements.h"
+#import "MRecipeListController.h"
 
 // temp
 #import "MEnumerations.h"
@@ -26,16 +27,26 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    MRecipeListController *controller = [[MRecipeListController alloc] initWithNibName:@"MRecipeListController" bundle:nil];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [navigationController setNavigationBarHidden:YES];
+    self.window.rootViewController = navigationController;
+    
+    /*
     MIngredientsController *controller = [[MIngredientsController alloc] initWithNibName:@"MListOfIngridients" bundle:nil];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
     [navigationController setNavigationBarHidden:YES];
     self.window.rootViewController = navigationController;
+    
     
     NSArray* measurements = [[MMeasurements Instance] availableMeasurements];
     NSLog(@"%@", [measurements description]);
     
     MResultCode result = [[MMeasurements Instance] addNewMeasurement:@"cup(s)"];
     NSLog(@"%d", result);
+    
+    */
+    
     return YES;
 }
 

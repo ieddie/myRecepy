@@ -110,9 +110,7 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
     {
         [self readAllRecipesfromDB:databaseLocal];
     }
-    MRecipe* recipe = [self.allRecipesDictionary objectForKey:[NSNumber numberWithInt:recipeId]];
-    MRecipeWithIngredients* fullRecipe = [[MRecipeWithIngredients alloc] init];
-    fullRecipe.recipe = recipe;
+    MRecipeWithIngredients* fullRecipe = [[MRecipeWithIngredients alloc] initWithRecipeDetails:[self.allRecipesDictionary objectForKey:[NSNumber numberWithInt:recipeId]]];
     
     // now need to look up the ingredients for this recipe
     int resultCode = [self getIngredientsForRecipe:&fullRecipe fromDB:databaseLocal];
@@ -135,7 +133,7 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
         return GenericDBError;
     }
     
-    resultCode = sqlite3_bind_int(statement, 1, (*recipeToAddIngredients).recipe.Id);
+    resultCode = sqlite3_bind_int(statement, 1, (*recipeToAddIngredients).RecipeDetails.Id);
     
     while (sqlite3_step(statement) == SQLITE_ROW)
     {
@@ -408,7 +406,7 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
         {
             MRecipe* recipe = [self.allRecipesDictionary objectForKey:[NSNumber numberWithInt:recipeId]];
             MRecipeWithIngredients* fullRecipe = [[MRecipeWithIngredients alloc] init];
-            fullRecipe.recipe = recipe;
+            fullRecipe.RecipeDetails = recipe;
             
             // now need to look up the ingredients for this recipe
             if([self getIngredientsForRecipe:&fullRecipe fromDB:databaseLocal] != Success)
@@ -491,7 +489,7 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
         {
             MRecipe* recipe = [self.allRecipesDictionary objectForKey:[NSNumber numberWithInt:recipeId]];
             MRecipeWithIngredients* fullRecipe = [[MRecipeWithIngredients alloc] init];
-            fullRecipe.recipe = recipe;
+            fullRecipe.RecipeDetails = recipe;
             
             // now need to look up the ingredients for this recipe
             if([self getIngredientsForRecipe:&fullRecipe fromDB:databaseLocal] != Success)

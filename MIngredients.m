@@ -9,7 +9,7 @@
 #import "MIngredients.h"
 
 @interface MIngredients()
-@property (readwrite, strong, nonatomic) NSArray* currentIngredients;
+@property (readwrite, strong, nonatomic) NSArray* availableIngredients;
 @end
 
 @implementation MIngredients
@@ -68,7 +68,7 @@ static NSString *updateExistingQuery = @"Update ingredients set name=? where id=
     }
     
     // now populate ivar with temporary array
-    self.currentIngredients = [NSArray arrayWithArray:allIngedients];
+    self.availableIngredients = [NSArray arrayWithArray:allIngedients];
     
     // finalize (close) the sqlite statement
     resultCode = sqlite3_finalize(statement);
