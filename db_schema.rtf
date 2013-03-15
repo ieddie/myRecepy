@@ -7,7 +7,10 @@
 \deftab720
 \pard\pardeftab720
 
-\f0\fs24 \cf2 CREATE TABLE measurements ( id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50) UNIQUE);\
+\f0\fs24 \cf2 .headers ON\
+.mode column\
+\
+CREATE TABLE measurements ( id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50) UNIQUE);\
 INSERT INTO measurements (name) VALUES ('cup(s)');\
 INSERT INTO measurements (name) VALUES ('ml(s)');\
 INSERT INTO measurements (name) VALUES ('table spoon(s)');\

@@ -9,6 +9,10 @@
 #import "MAmountMeasurement.h"
 
 @interface MAmountMeasurement ()
+{
+    NSArray* measurements;
+    NSInteger measurementId;
+}
 
 @end
 
@@ -18,7 +22,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self->measurements = [[MMeasurements Instance] availableMeasurements];
     }
     return self;
 }
@@ -34,5 +38,25 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)pickerView:(UIPickerView *)pV didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    self->measurementId = [[self->measurements objectAtIndex:row] Id];
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [self->measurements count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [[self->measurements objectAtIndex:row] Name];
+}
+
 
 @end

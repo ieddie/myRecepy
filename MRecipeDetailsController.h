@@ -12,13 +12,16 @@
 
 @interface MRecipeDetailsController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UILabel *lblName;
-@property (weak, nonatomic) IBOutlet UILabel *lblDescription;
+@property (weak, nonatomic) IBOutlet UITextField *txfName;
+@property (weak, nonatomic) IBOutlet UITextField *txfDescription;
+
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (weak, nonatomic) IBOutlet UIButton *isFavButton;
 @property (nonatomic) NSInteger ingredientToAddId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil RecipeId:(NSInteger)recipeId;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;

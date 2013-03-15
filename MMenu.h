@@ -12,16 +12,9 @@
 
 @interface MMenu : NSObject
 
--(void) addRecipe:(MRecipe*) recipeToAdd;
+@property (nonatomic) NSInteger Id;
+@property (strong, nonatomic) NSString* Name;
+@property (strong, nonatomic) NSString* Description;
 
--(NSArray *) getRecipies;
--(MRecipeWithIngredients *) getRecipeWithIngredientsById:(NSInteger)Id;
--(MRecipeWithIngredients *) getRecipeByIndex:(NSInteger)Index;
-
--(void) markIngredientAsBoughtWithId:(NSUUID*) Id;
--(void) markIngredientAsBoughtWithNotBoughtIndex:(NSInteger) Index;
-
--(void) markInredientAsToBuyWithId:(NSUUID*) Id;
--(void) markInredientAsToBuyWithIndex:(NSInteger) Index;
-
+-(id) initWithId:(NSInteger)Id Name:(NSString*)name Description:(NSString*)description;
 @end

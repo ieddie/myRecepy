@@ -8,61 +8,17 @@
 
 #import "MMenu.h"
 
-@interface MMenu()
-{
-    NSMutableArray* recipies;
-
-    NSMutableArray* toBuyIngredients;
-    NSMutableArray* alreadyBoughtIngredients;
-}
-@end
-
 @implementation MMenu
 
--(void) markIngredientAsBoughtWithId:(NSUUID*) Id {
-    // implement via removeObjectIdenticalTo or turn NSMutableArray into NSDictionary?
-}
-
--(void) markIngredientAsBoughtWithNotBoughtIndex:(NSInteger) Index {
-    // this will need to be reimplemented if we turn NSMutableArray into NSDictionary
-    NSUUID* Id = [toBuyIngredients objectAtIndex:Index];
-    [toBuyIngredients removeObjectAtIndex:Index];
-    [alreadyBoughtIngredients addObject:Id];
-}
-
--(void) markInredientAsToBuyWithId:(NSUUID*) Id {
-    // implement via removeObjectIdenticalTo or turn NSMutableArray into NSDictionary?    
-}
-
--(void) markInredientAsToBuyWithIndex:(NSInteger) Index {
-    // this will need to be reimplemented if we turn NSMutableArray into NSDictionary
-    NSUUID* Id = [alreadyBoughtIngredients objectAtIndex:Index];
-    [alreadyBoughtIngredients removeObjectAtIndex:Index];
-    [toBuyIngredients addObject:Id];
-}
-
--(void) addRecipe:(MRecipe*) recipeToAdd {
-    if(recipeToAdd != nil) {
-        [recipies addObject:recipeToAdd];
+-(id) initWithId:(NSInteger)Id Name:(NSString*)name Description:(NSString*)description
+{
+    self = [super init];
+    if(self) {
+        [self setId:Id];
+        [self setName:[NSString stringWithString:name]];
+        [self setDescription:[NSString stringWithString:description]];
     }
-}
-
--(NSArray *) getRecipies {
-    return [NSArray arrayWithArray:recipies];
-}
-
--(MRecipe *) getRecipeById:(NSUUID *)Id {
-    if (Id != nil) {
-        // this will need to be reimplemented if we turn NSMutableArray into NSDictionary
-        return nil;
-    }
-    else {
-        return nil;
-    }
-}
-
--(MRecipe *) getRecipeByIndex:(NSInteger)Index {
-    return nil;
+    return self;
 }
 
 @end

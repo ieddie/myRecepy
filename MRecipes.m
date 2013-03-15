@@ -7,10 +7,10 @@
 //
 
 #import "MRecipes.h"
+#import "MMenus.h"
 
 @interface MRecipes()
 @property (readwrite, strong, nonatomic) NSMutableDictionary* allRecipesDictionary;
-@property (readwrite, strong, nonatomic) NSArray* AvailableRecipes;
 @end
 
 @implementation MRecipes
@@ -24,7 +24,7 @@ static NSString *updateQuery = @"Update recipes set name=?, Descrition=?, IsFavo
 static NSString *deleteQuery = @"Delete from recipes where id=?";
 
 static NSString *AddIngredientQuery = @"Insert into recipe_ingredients (recipe, ingredient, measurement, amount) values (?, ?, ?, ?)";
-static NSString *RemoveIngredientQuery = @"Delete from recipe_ingredients where recipe=? and ingredient=? and measurement=?";
+static NSString *RemoveIngredientQuery = @"Delete from recipe_ingredients where recipe=? and ingredient=? and measurement=? and amount=?";
 
 static NSString *changeFavoriteFlagQuery = @"Update recipes set isFavorite=? where Id=?";
 
@@ -474,14 +474,13 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
     return resultCode;
 }
 
-
-- (MRecipeWithIngredients*) removeIngredient:(MIngredientWithAmount*)ingredient fromRecipeWithId:(NSInteger) recipeId
+- (MRecipeWithIngredients*) removeIngredient:(MIngredientWithAmount *)ingredientToRemove fromRecipeWithId:(NSInteger)recipeId
 {
     MRecipeWithIngredients* result = nil;
     sqlite3* databaseLocal = [MDatabase OpenDbConnection];
     if(databaseLocal != nil)
     {
-        if([self removeIngredient:ingredient fromRecipeId:recipeId inDB:databaseLocal] != SQLITE_OK)
+        if([self removeIngredient:ingredientToRemove fromRecipeId:recipeId inDB:databaseLocal] != SQLITE_OK)
         {
             // something went wrong, inform the user
         }
@@ -502,11 +501,11 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
     return result;
 }
 
-- (int) removeIngredient:(MIngredientWithAmount*)ingredientToRemove fromRecipeId:(NSInteger) recipeId inDB:(sqlite3*)databaseLocal
+- (int) removeIngredient:(MIngredientWithAmount*)Ingredient fromRecipeId:(NSInteger)recipeId inDB:(sqlite3*)databaseLocal
 {
     sqlite3_stmt *statement;
     
-    int resultCode = sqlite3_prepare_v2(databaseLocal, [AddIngredientQuery UTF8String], -1, &statement, nil);
+    int resultCode = sqlite3_prepare_v2(databaseLocal, [RemoveIngredientQuery UTF8String], -1, &statement, nil);
     if(resultCode != SQLITE_OK)
     {
         NSLog(@"Failed to prepare SQLite statement for remove ingredient from recipe. Error code %d", resultCode);
@@ -520,20 +519,26 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
         return resultCode;
     }
     
-    resultCode = sqlite3_bind_int(statement, 2, ingredientToRemove.Ingredient.Id);
+    resultCode = sqlite3_bind_int(statement, 2, Ingredient.Ingredient.Id);
     if(resultCode != SQLITE_OK)
     {
         NSLog(@"Failed to bind the parameter to SQLite statement for remove ingredient from recipe. Error code %d", resultCode);
         return resultCode;
     }
     
-    resultCode = sqlite3_bind_int(statement, 3, ingredientToRemove.Measurement.Id);
+    resultCode = sqlite3_bind_int(statement, 3, Ingredient.Measurement.Id);
     if(resultCode != SQLITE_OK)
     {
         NSLog(@"Failed to bind the parameter to SQLite statement for remove ingredient from recipe. Error code %d", resultCode);
         return resultCode;
     }
-    
+    resultCode = sqlite3_bind_double(statement, 4, Ingredient.Amount);
+    if(resultCode != SQLITE_OK)
+    {
+        NSLog(@"Failed to bind the parameter to SQLite statement for remove ingredient from recipe. Error code %d", resultCode);
+        return resultCode;
+    }
+
     resultCode = sqlite3_step(statement);
     if(resultCode != SQLITE_DONE)
     {

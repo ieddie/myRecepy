@@ -14,6 +14,7 @@
     MIngredient* ingredientInProgress;
     MMeasurement* measurementInProgree;
     double amountInProgress;
+    BOOL showAddButton;
 }
 
 @end
@@ -28,6 +29,17 @@ static NSString *CellIdentifier = @"Cell";
     if (self) {
         self->recipe = [[MRecipes Instance] getRecipeWithIngredientsForId:recipeId];
         self.ingredientToAddId = 0;
+        self->showAddButton = FALSE;
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.ingredientToAddId = 0;
+        self->showAddButton = TRUE;
     }
     return self;
 }
@@ -35,8 +47,8 @@ static NSString *CellIdentifier = @"Cell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.lblName.text = self->recipe.RecipeDetails.Name;
-    self.lblDescription.text = self->recipe.RecipeDetails.Description;
+    self.txfName.text = self->recipe.RecipeDetails.Name;
+    self.txfDescription.text = self->recipe.RecipeDetails.Description;
     [self setIsFavImage];
     
     if(self.ingredientToAddId != 0)

@@ -9,12 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "MRecipes.h"
 #import "MRecipeDetailsController.h"
+#import "MMenus.h"
+#import "MEnumerations.h"
 
 @interface MRecipeListController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil MenuId:(NSInteger)MenuId Parent:(id<MNavigationParent>)Parent;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@property(weak, nonatomic) id<MNavigationParent> parent;
 
 @end

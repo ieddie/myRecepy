@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMeasurements.h"
 
 @interface MAmountMeasurement : UIViewController
 

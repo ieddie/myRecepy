@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D29BDD916E6DF43007D1C0B /* MAmountMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D29BDD716E6DF42007D1C0B /* MAmountMeasurement.m */; };
+		8D29BDDA16E6DF43007D1C0B /* MAmountMeasurement.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D29BDD816E6DF43007D1C0B /* MAmountMeasurement.xib */; };
 		8D4318EE16B22B7B00D0989C /* MRecipes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4318ED16B22B7B00D0989C /* MRecipes.m */; };
 		8D4318F116B22D0F00D0989C /* MRecipeWithIngredients.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4318F016B22D0F00D0989C /* MRecipeWithIngredients.m */; };
 		8D43190216B600C600D0989C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4318F916B5EDD200D0989C /* SenTestingKit.framework */; };
@@ -19,6 +21,10 @@
 		8D43191816B61F0D00D0989C /* MMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7937816AAF360008120DF /* MMeasurement.m */; };
 		8D43191A16B61F2700D0989C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D43191916B61F2700D0989C /* libsqlite3.0.dylib */; };
 		8D43191B16B6371A00D0989C /* Menus.sql in Resources */ = {isa = PBXBuildFile; fileRef = 8DE62D0016AA52CF00932F5B /* Menus.sql */; };
+		8D7B300516E84A2500582D1A /* shopping_bag.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D7B300416E84A2500582D1A /* shopping_bag.png */; };
+		8D7B300A16E84DCC00582D1A /* MMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B300816E84DCC00582D1A /* MMenuController.m */; };
+		8D7B300B16E84DCC00582D1A /* MMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D7B300916E84DCC00582D1A /* MMenuController.xib */; };
+		8D7B300E16E84FE700582D1A /* MMenus.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B300D16E84FE700582D1A /* MMenus.m */; };
 		8D7EBE81169FD74200819A4E /* MIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7EBE80169FD74200819A4E /* MIngredient.m */; };
 		8D7EBE85169FDCDB00819A4E /* MMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7EBE84169FDCDB00819A4E /* MMenu.m */; };
 		8D96509E16E3C7BD001B50D1 /* MRecipeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D96509C16E3C7BD001B50D1 /* MRecipeListController.m */; };
@@ -32,6 +38,7 @@
 		8DAC7A5516E41AFF00BB7DB1 /* star_enabled_brushed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAC7A5416E41AFF00BB7DB1 /* star_enabled_brushed.png */; };
 		8DAC7A5916E4341500BB7DB1 /* MIngredientController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC7A5716E4341500BB7DB1 /* MIngredientController.m */; };
 		8DAC7A5A16E4341500BB7DB1 /* MIngredientController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DAC7A5816E4341500BB7DB1 /* MIngredientController.xib */; };
+		8DC9DE4816EBA35C00F69139 /* MIngredientFromRecipeInMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC9DE4716EBA35C00F69139 /* MIngredientFromRecipeInMenu.m */; };
 		8DDF6A74169B27BE002019C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A73169B27BE002019C0 /* UIKit.framework */; };
 		8DDF6A76169B27BE002019C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A75169B27BE002019C0 /* Foundation.framework */; };
 		8DDF6A78169B27BE002019C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF6A77169B27BE002019C0 /* CoreGraphics.framework */; };
@@ -49,6 +56,8 @@
 		8DE62D0116AA52CF00932F5B /* Menus.sql in Resources */ = {isa = PBXBuildFile; fileRef = 8DE62D0016AA52CF00932F5B /* Menus.sql */; };
 		8DE62D0416AA5DCE00932F5B /* MIngredientWithAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE62D0316AA5DCE00932F5B /* MIngredientWithAmount.m */; };
 		8DE62D0716AA60D500932F5B /* MMeasurements.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE62D0616AA60D500932F5B /* MMeasurements.m */; };
+		8DEE045316F02710001040D7 /* MRecipesForMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DEE045116F02710001040D7 /* MRecipesForMenuController.m */; };
+		8DEE045416F02710001040D7 /* MRecipesForMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DEE045216F02710001040D7 /* MRecipesForMenuController.xib */; };
 		8DF43F7216A2737E007E2C81 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DF43F7116A2737E007E2C81 /* libsqlite3.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -65,6 +74,9 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
+		8D29BDD616E6DF42007D1C0B /* MAmountMeasurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MAmountMeasurement.h; path = ../MAmountMeasurement.h; sourceTree = "<group>"; };
+		8D29BDD716E6DF42007D1C0B /* MAmountMeasurement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MAmountMeasurement.m; path = ../MAmountMeasurement.m; sourceTree = "<group>"; };
+		8D29BDD816E6DF43007D1C0B /* MAmountMeasurement.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MAmountMeasurement.xib; path = ../MAmountMeasurement.xib; sourceTree = "<group>"; };
 		8D4318EC16B22B7B00D0989C /* MRecipes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRecipes.h; sourceTree = "<group>"; };
 		8D4318ED16B22B7B00D0989C /* MRecipes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRecipes.m; sourceTree = "<group>"; };
 		8D4318EF16B22D0F00D0989C /* MRecipeWithIngredients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRecipeWithIngredients.h; sourceTree = "<group>"; };
@@ -77,6 +89,12 @@
 		8D43190C16B600C700D0989C /* RecipeUnitTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecipeUnitTest.m; sourceTree = "<group>"; };
 		8D43190E16B600C700D0989C /* RecipeUnitTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RecipeUnitTest-Prefix.pch"; sourceTree = "<group>"; };
 		8D43191916B61F2700D0989C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		8D7B300416E84A2500582D1A /* shopping_bag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopping_bag.png; sourceTree = "<group>"; };
+		8D7B300716E84DCC00582D1A /* MMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMenuController.h; sourceTree = "<group>"; };
+		8D7B300816E84DCC00582D1A /* MMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMenuController.m; sourceTree = "<group>"; };
+		8D7B300916E84DCC00582D1A /* MMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MMenuController.xib; sourceTree = "<group>"; };
+		8D7B300C16E84FE600582D1A /* MMenus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMenus.h; sourceTree = "<group>"; };
+		8D7B300D16E84FE700582D1A /* MMenus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMenus.m; sourceTree = "<group>"; };
 		8D7EBE7F169FD74200819A4E /* MIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIngredient.h; sourceTree = "<group>"; };
 		8D7EBE80169FD74200819A4E /* MIngredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIngredient.m; sourceTree = "<group>"; };
 		8D7EBE83169FDCDB00819A4E /* MMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMenu.h; sourceTree = "<group>"; };
@@ -99,6 +117,8 @@
 		8DAC7A5616E4341500BB7DB1 /* MIngredientController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIngredientController.h; sourceTree = "<group>"; };
 		8DAC7A5716E4341500BB7DB1 /* MIngredientController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIngredientController.m; sourceTree = "<group>"; };
 		8DAC7A5816E4341500BB7DB1 /* MIngredientController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MIngredientController.xib; sourceTree = "<group>"; };
+		8DC9DE4616EBA35C00F69139 /* MIngredientFromRecipeInMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIngredientFromRecipeInMenu.h; sourceTree = "<group>"; };
+		8DC9DE4716EBA35C00F69139 /* MIngredientFromRecipeInMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIngredientFromRecipeInMenu.m; sourceTree = "<group>"; };
 		8DDF6A6F169B27BE002019C0 /* myRecipeList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myRecipeList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DDF6A73169B27BE002019C0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8DDF6A75169B27BE002019C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -124,6 +144,9 @@
 		8DE62D0316AA5DCE00932F5B /* MIngredientWithAmount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIngredientWithAmount.m; sourceTree = "<group>"; };
 		8DE62D0516AA60D500932F5B /* MMeasurements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMeasurements.h; sourceTree = "<group>"; };
 		8DE62D0616AA60D500932F5B /* MMeasurements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMeasurements.m; sourceTree = "<group>"; };
+		8DEE045016F02710001040D7 /* MRecipesForMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRecipesForMenuController.h; sourceTree = "<group>"; };
+		8DEE045116F02710001040D7 /* MRecipesForMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRecipesForMenuController.m; sourceTree = "<group>"; };
+		8DEE045216F02710001040D7 /* MRecipesForMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRecipesForMenuController.xib; sourceTree = "<group>"; };
 		8DF43F7116A2737E007E2C81 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -212,6 +235,9 @@
 		8DDF6A7B169B27BE002019C0 /* myRecipeList */ = {
 			isa = PBXGroup;
 			children = (
+				8D29BDD616E6DF42007D1C0B /* MAmountMeasurement.h */,
+				8D29BDD716E6DF42007D1C0B /* MAmountMeasurement.m */,
+				8D29BDD816E6DF43007D1C0B /* MAmountMeasurement.xib */,
 				8D9650A116E3CEAA001B50D1 /* MRecipeDetailsController.h */,
 				8D9650A216E3CEAA001B50D1 /* MRecipeDetailsController.m */,
 				8D9650A316E3CEAB001B50D1 /* MRecipeDetailsController.xib */,
@@ -228,6 +254,12 @@
 				8DAC7A5616E4341500BB7DB1 /* MIngredientController.h */,
 				8DAC7A5716E4341500BB7DB1 /* MIngredientController.m */,
 				8DAC7A5816E4341500BB7DB1 /* MIngredientController.xib */,
+				8D7B300716E84DCC00582D1A /* MMenuController.h */,
+				8D7B300816E84DCC00582D1A /* MMenuController.m */,
+				8D7B300916E84DCC00582D1A /* MMenuController.xib */,
+				8DEE045016F02710001040D7 /* MRecipesForMenuController.h */,
+				8DEE045116F02710001040D7 /* MRecipesForMenuController.m */,
+				8DEE045216F02710001040D7 /* MRecipesForMenuController.xib */,
 			);
 			name = myRecipeList;
 			path = myRecepy;
@@ -236,6 +268,7 @@
 		8DDF6A7C169B27BE002019C0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8D7B300416E84A2500582D1A /* shopping_bag.png */,
 				8DAC7A5416E41AFF00BB7DB1 /* star_enabled_brushed.png */,
 				8DAC7A5216E4146200BB7DB1 /* star_disabled_brushed.png */,
 				8DDF6A7D169B27BE002019C0 /* myRecipyList-Info.plist */,
@@ -273,6 +306,10 @@
 				8DA7938016AF92A0008120DF /* MDatabase.h */,
 				8DA7938116AF92A0008120DF /* MDatabase.m */,
 				8DE62D0016AA52CF00932F5B /* Menus.sql */,
+				8D7B300C16E84FE600582D1A /* MMenus.h */,
+				8D7B300D16E84FE700582D1A /* MMenus.m */,
+				8DC9DE4616EBA35C00F69139 /* MIngredientFromRecipeInMenu.h */,
+				8DC9DE4716EBA35C00F69139 /* MIngredientFromRecipeInMenu.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -369,6 +406,10 @@
 				8DAC7A5316E4146200BB7DB1 /* star_disabled_brushed.png in Resources */,
 				8DAC7A5516E41AFF00BB7DB1 /* star_enabled_brushed.png in Resources */,
 				8DAC7A5A16E4341500BB7DB1 /* MIngredientController.xib in Resources */,
+				8D29BDDA16E6DF43007D1C0B /* MAmountMeasurement.xib in Resources */,
+				8D7B300516E84A2500582D1A /* shopping_bag.png in Resources */,
+				8D7B300B16E84DCC00582D1A /* MMenuController.xib in Resources */,
+				8DEE045416F02710001040D7 /* MRecipesForMenuController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +464,11 @@
 				8D96509E16E3C7BD001B50D1 /* MRecipeListController.m in Sources */,
 				8D9650A416E3CEAB001B50D1 /* MRecipeDetailsController.m in Sources */,
 				8DAC7A5916E4341500BB7DB1 /* MIngredientController.m in Sources */,
+				8D29BDD916E6DF43007D1C0B /* MAmountMeasurement.m in Sources */,
+				8D7B300A16E84DCC00582D1A /* MMenuController.m in Sources */,
+				8D7B300E16E84FE700582D1A /* MMenus.m in Sources */,
+				8DC9DE4816EBA35C00F69139 /* MIngredientFromRecipeInMenu.m in Sources */,
+				8DEE045316F02710001040D7 /* MRecipesForMenuController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

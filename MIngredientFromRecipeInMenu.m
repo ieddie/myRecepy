@@ -10,4 +10,15 @@
 
 @implementation MIngredientFromRecipeInMenu
 
+-(id) initWithIngredient:(MIngredientWithAmount*)ingredient RecipeMenuId:(NSInteger)recipeInMenuId RecipeIngredientId:(NSInteger)recipeIngredientId
+{
+    self = [super init];
+    if(self) {
+        [self setIngredient:ingredient];
+        [self setRecipeIngredientId:recipeIngredientId];
+        [self setRecipeMenuId:recipeInMenuId];
+    }
+    return self;
+}
+
 @end

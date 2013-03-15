@@ -11,6 +11,8 @@
 @interface MRecipeListController ()
 {
     NSArray* recipes;
+    NSInteger CurrentMenuId;
+    BOOL addingToMenu;
 }
 @end
 
@@ -22,7 +24,20 @@ static NSString *CellIdentifier = @"Cell";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self->recipes = [[MRecipes Instance] AvailableRecipes];
+        addingToMenu = FALSE;
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil MenuId:(NSInteger)MenuId Parent:(id<MNavigationParent>)Parent
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self->CurrentMenuId = MenuId;
+        self->recipes = [[MMenus Instance] getRecipesNotInMenu:MenuId];
+        addingToMenu = TRUE;
+        self.parent = Parent;
     }
     return self;
 }
@@ -30,7 +45,46 @@ static NSString *CellIdentifier = @"Cell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    if(addingToMenu) {
+        self.navigationBar.topItem.title = @"Recipes not in yet";
+    } else {
+        self.navigationBar.topItem.title = @"Recipes";
+    }
+
+    // these numbers would not work for iPad, need to take idiom into effect
+    UIToolbar *tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 40.0f, 44.0f)];
+    tools.clearsContextBeforeDrawing = NO;
+    tools.clipsToBounds = NO;
+    tools.barStyle = -1; // clear background
+    
+    NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:3];
+    
+    UIBarButtonItem* buttonPlus = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                target:self
+                                                                                action:@selector(AddNewRecipe)];
+    [buttons addObject:buttonPlus];
+    /* For now removing shopping bag from this view. change size of rectangle to 0, 0, 80, 40
+    // Create a spacer.
+    UIBarButtonItem* spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                            target:nil
+                                                                            action:nil];
+    spacer.width = 12.0f;
+    [buttons addObject:spacer];
+    
+    UIBarButtonItem *buttonShoppingBag = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shopping_bag.png"]
+                                                                          style:UIBarButtonItemStylePlain
+                                                                         target:self
+                                                                         action:@selector(ShowShoppingBag)];
+    [buttons addObject:buttonShoppingBag];
+     */
+    
+    // Add buttons to toolbar and toolbar to nav bar.
+    [tools setItems:buttons animated:NO];
+    
+    UIBarButtonItem *allButtonsInOne = [[UIBarButtonItem alloc] initWithCustomView:tools];
+    UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
+    currentItem.rightBarButtonItem = allButtonsInOne;
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,7 +101,7 @@ static NSString *CellIdentifier = @"Cell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[MRecipes Instance] AvailableRecipes] count];
+    return [self->recipes count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -57,19 +111,39 @@ static NSString *CellIdentifier = @"Cell";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [[[[MRecipes Instance] AvailableRecipes] objectAtIndex:indexPath.row] Name];
+    cell.textLabel.text = [[self->recipes objectAtIndex:indexPath.row] Name];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MRecipe* recipe = [[[MRecipes Instance] AvailableRecipes] objectAtIndex:indexPath.row];
-       //Initialize new viewController
-    MRecipeDetailsController *detailsController = [[MRecipeDetailsController alloc] initWithNibName:@"MRecipeDetailsController" bundle:nil RecipeId:recipe.Id];
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    //Push new view to navigationController stack
-    [self.navigationController pushViewController:detailsController animated:YES];
+    MRecipe* recipe = [self->recipes objectAtIndex:indexPath.row];
+    if(!addingToMenu) {
+        MRecipeDetailsController *detailsController = [[MRecipeDetailsController alloc] initWithNibName:@"MRecipeDetailsController"
+                                                                                                 bundle:nil
+                                                                                               RecipeId:recipe.Id];
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        [self.navigationController pushViewController:detailsController animated:YES];
+    } else {
+        [[MMenus Instance] addRecipe:recipe.Id ToMenu:self->CurrentMenuId];
+        [self.parent ChildIsUnloading];
+        [self.navigationController popViewControllerAnimated:TRUE];
+    }
 }
 
+- (void) AddNewRecipe {
+    MRecipeDetailsController *addNewRecipeController = [[MRecipeDetailsController alloc] initWithNibName:@"MRecipeDetailsController"
+                                                                                                  bundle:nil];
+    [self.navigationController pushViewController:addNewRecipeController
+                                         animated:YES];
+}
+
+- (IBAction)BackClicked:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) ShowShoppingBag {
+    NSLog(@"%@", @"Need to show shopping bag here");
+}
 
 @end

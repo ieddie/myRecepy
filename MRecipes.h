@@ -15,9 +15,9 @@
 #import "MIngredient.h"
 
 @interface MRecipes : NSObject
-+ (MRecipes *)Instance;
++ (MRecipes*)Instance;
 
-@property (readonly, strong, nonatomic) NSArray* AvailableRecipes;
+- (NSArray*) AvailableRecipes;
 
 - (MRecipeWithIngredients*) getRecipeWithIngredientsForId:(NSInteger)recipeId;
 
@@ -26,7 +26,7 @@
 - (BOOL) removeRecipe:(NSInteger)recipeToRemove;
 
 - (MRecipeWithIngredients*) addIngredient:(MIngredientWithAmount *)newIngredient toRecipeWithId:(NSInteger) recipeId;
-- (MRecipeWithIngredients*) removeIngredientWithId:(NSInteger *)ingredientId fromRecipeWithId:(NSInteger) recipeId;
+- (MRecipeWithIngredients*) removeIngredient:(MIngredientWithAmount*)ingredientToRemove fromRecipeWithId:(NSInteger) recipeId;
 
 - (MResultCode) markRecipeAsFavorite:(NSInteger) recipeId;
 - (MResultCode) unmarkRecipeAsFavorite:(NSInteger) recipeId;

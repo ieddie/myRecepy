@@ -12,3 +12,7 @@ typedef enum {
     GenericDBError = 2
 } MResultCode;
 
+@protocol MNavigationParent <NSObject>
+@required
+-(void) ChildIsUnloading;
+@end

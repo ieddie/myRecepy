@@ -15,9 +15,8 @@
 {
     NSMutableArray* ingrSearchResult;
     NSArray* ingredients;
-    NSArray* measurements;
     NSInteger counter;
-    NSInteger measurementId;
+    
     __weak IBOutlet UITableView *ingredienttable;
 }
 @end
@@ -32,7 +31,6 @@ static NSString *CellIdentifier = @"Cell";
     if (self) {
         self->ingrSearchResult = [[NSMutableArray alloc] init];
         self->ingredients = [[MIngredients Instance] availableIngredients];
-        self->measurements = [[MMeasurements Instance] availableMeasurements];
     }
     return self;
 }
@@ -41,12 +39,56 @@ static NSString *CellIdentifier = @"Cell";
 {
     [super viewDidLoad];
 
-	//Add the search bar
+	//Add the search bar, set no autocorrection
     self.tableView.tableHeaderView = self.searchBar;
     self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
     
     searching = NO;
     letUserSelectRow = YES;
+    
+    // add standard "+" button
+    UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
+    UIBarButtonItem* buttonPlus = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                target:self
+                                                                                action:@selector(AddNewIngredientClicked:)];
+    currentItem.rightBarButtonItem = buttonPlus;
+}
+
+-(void) createThreeButtons
+{
+    // these numbers would not work for iPad, need to take idiom into effect
+    UIToolbar *tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 103.0f, 44.0f)];
+    tools.clearsContextBeforeDrawing = NO;
+    tools.clipsToBounds = NO;
+    tools.tintColor = [UIColor colorWithWhite:0.305f alpha:0.0f]; // should be close to black
+    tools.barStyle = -1; // clear background
+    
+    NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:3];
+    
+    UIBarButtonItem* buttonPlus = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                target:self
+                                                                                action:@selector(AddNewIngredientClicked:)];
+    [buttons addObject:buttonPlus];
+    
+    // Create a spacer.
+    UIBarButtonItem* spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                            target:nil
+                                                                            action:nil];
+    spacer.width = 12.0f;
+    [buttons addObject:spacer];
+    
+    // create "Done" button
+    UIBarButtonItem* buttonDone = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                     target:self
+                                                                     action:@selector(doneSearchingClicked)];
+    [buttons addObject:buttonDone];
+    
+    // Add buttons to toolbar and toolbar to nav bar.
+    [tools setItems:buttons animated:NO];
+    
+    UIBarButtonItem *allButtonsInOne = [[UIBarButtonItem alloc] initWithCustomView:tools];
+    UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
+    currentItem.rightBarButtonItem = allButtonsInOne;
 }
 
 -(void) refreshListOfIngredients
@@ -58,15 +100,12 @@ static NSString *CellIdentifier = @"Cell";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)AddNewIngredientClicked:(id)sender {
-    [self.tableView setEditing:FALSE animated:TRUE];
-    /*
     MIngredientController *addNewIngredientController = [[MIngredientController alloc] initWithNibName:@"MIngredientController" bundle:nil];
     addNewIngredientController.delegate = self;
     [self.navigationController pushViewController:addNewIngredientController animated:YES];
-     */
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -116,36 +155,14 @@ static NSString *CellIdentifier = @"Cell";
         return nil;
 }
 
-- (void)pickerView:(UIPickerView *)pV didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    self->measurementId = [[self->measurements objectAtIndex:row] Id];
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [self->measurements count];
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return [[self->measurements objectAtIndex:row] Name];
-}
-
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar {
     
     searching = YES;
     letUserSelectRow = NO;
     self.tableView.scrollEnabled = NO;
     
-    //Add the done button.
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                           target:self
-                                                                                           action:@selector(doneSearchingClicked)];
+    // Add the done button.
+    [self createThreeButtons];
 }
 
 - (void) searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
@@ -160,9 +177,15 @@ static NSString *CellIdentifier = @"Cell";
     
     letUserSelectRow = YES;
     searching = NO;
-    self.navigationItem.rightBarButtonItem = nil;
+        
     self.tableView.scrollEnabled = YES;
     
+    // go back to two buttons
+    UIBarButtonItem* buttonPlus = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                target:self
+                                                                                action:@selector(AddNewIngredientClicked:)];
+    UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
+    currentItem.rightBarButtonItem = buttonPlus;
     [self.tableView reloadData];
 }
 
@@ -185,6 +208,9 @@ static NSString *CellIdentifier = @"Cell";
     }
     
     [self.tableView reloadData];
+}
+- (IBAction)closeClicked:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) searchTableView
