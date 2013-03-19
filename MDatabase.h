@@ -11,6 +11,7 @@
 
 @interface MDatabase : NSObject
 + (NSString*) Path;
++ (NSString*) Name;
 + (sqlite3*) OpenDbConnection;
 
 @end

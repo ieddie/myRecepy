@@ -17,14 +17,18 @@
     NSString* path;
 #if (TARGET_IPHONE_SIMULATOR)
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    path =[[bundle resourcePath] stringByAppendingPathComponent:@"Menus.sql"];
+    path =[[bundle resourcePath] stringByAppendingPathComponent:[MDatabase Name]];
 #else
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
     NSString *documentsDir = [paths objectAtIndex:0];
-    path = [documentsDir stringByAppendingPathComponent:@"Menus.sql"];
+    path = [documentsDir stringByAppendingPathComponent:[MDatabase Name]];
 #endif
     //NSLog(@"Current db path: %@", path);
     return path;
+}
+
++ (NSString*) Name {
+    return @"Menus.sql";
 }
 
 +(sqlite3*) OpenDbConnection
