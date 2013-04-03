@@ -21,6 +21,8 @@
 		8D43191816B61F0D00D0989C /* MMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA7937816AAF360008120DF /* MMeasurement.m */; };
 		8D43191A16B61F2700D0989C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D43191916B61F2700D0989C /* libsqlite3.0.dylib */; };
 		8D43191B16B6371A00D0989C /* Menus.sql in Resources */ = {isa = PBXBuildFile; fileRef = 8DE62D0016AA52CF00932F5B /* Menus.sql */; };
+		8D6C877916F8158600425226 /* MShoppingCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6C877716F8158600425226 /* MShoppingCart.m */; };
+		8D6C877A16F8158600425226 /* MShoppingCart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6C877816F8158600425226 /* MShoppingCart.xib */; };
 		8D7B300516E84A2500582D1A /* shopping_bag.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D7B300416E84A2500582D1A /* shopping_bag.png */; };
 		8D7B300A16E84DCC00582D1A /* MMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B300816E84DCC00582D1A /* MMenuController.m */; };
 		8D7B300B16E84DCC00582D1A /* MMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D7B300916E84DCC00582D1A /* MMenuController.xib */; };
@@ -89,6 +91,9 @@
 		8D43190C16B600C700D0989C /* RecipeUnitTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecipeUnitTest.m; sourceTree = "<group>"; };
 		8D43190E16B600C700D0989C /* RecipeUnitTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RecipeUnitTest-Prefix.pch"; sourceTree = "<group>"; };
 		8D43191916B61F2700D0989C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		8D6C877616F8158600425226 /* MShoppingCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MShoppingCart.h; sourceTree = "<group>"; };
+		8D6C877716F8158600425226 /* MShoppingCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MShoppingCart.m; sourceTree = "<group>"; };
+		8D6C877816F8158600425226 /* MShoppingCart.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MShoppingCart.xib; sourceTree = "<group>"; };
 		8D7B300416E84A2500582D1A /* shopping_bag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopping_bag.png; sourceTree = "<group>"; };
 		8D7B300716E84DCC00582D1A /* MMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMenuController.h; sourceTree = "<group>"; };
 		8D7B300816E84DCC00582D1A /* MMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMenuController.m; sourceTree = "<group>"; };
@@ -260,6 +265,9 @@
 				8DEE045016F02710001040D7 /* MRecipesForMenuController.h */,
 				8DEE045116F02710001040D7 /* MRecipesForMenuController.m */,
 				8DEE045216F02710001040D7 /* MRecipesForMenuController.xib */,
+				8D6C877616F8158600425226 /* MShoppingCart.h */,
+				8D6C877716F8158600425226 /* MShoppingCart.m */,
+				8D6C877816F8158600425226 /* MShoppingCart.xib */,
 			);
 			name = myRecipeList;
 			path = myRecepy;
@@ -410,6 +418,7 @@
 				8D7B300516E84A2500582D1A /* shopping_bag.png in Resources */,
 				8D7B300B16E84DCC00582D1A /* MMenuController.xib in Resources */,
 				8DEE045416F02710001040D7 /* MRecipesForMenuController.xib in Resources */,
+				8D6C877A16F8158600425226 /* MShoppingCart.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +478,7 @@
 				8D7B300E16E84FE700582D1A /* MMenus.m in Sources */,
 				8DC9DE4816EBA35C00F69139 /* MIngredientFromRecipeInMenu.m in Sources */,
 				8DEE045316F02710001040D7 /* MRecipesForMenuController.m in Sources */,
+				8D6C877916F8158600425226 /* MShoppingCart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@
 @property (nonatomic) NSInteger Id;
 @property (nonatomic) NSString* Name;
 
+- (id)initWithId:(NSInteger)ID;
 - (id)initWithId:(NSInteger)ID Name:(NSString*)name;
 
 @end

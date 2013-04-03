@@ -22,7 +22,11 @@
 - (MRecipeWithIngredients*) getRecipeWithIngredientsForId:(NSInteger)recipeId;
 
 - (MResultCode) addNewRecipe:(MRecipe *)recipeToAdd;
+
+- (BOOL) updateRecipeName:(NSString*) newName InRecipe:(NSInteger)recipeId;
+- (BOOL) updateRecipeDescription:(NSString*) newDescription InRecipe:(NSInteger)recipeId;
 - (BOOL) updateRecipe:(MRecipe*) recipeToUpdate;
+
 - (BOOL) removeRecipe:(NSInteger)recipeToRemove;
 
 - (MRecipeWithIngredients*) addIngredient:(MIngredientWithAmount *)newIngredient toRecipeWithId:(NSInteger) recipeId;

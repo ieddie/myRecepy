@@ -20,7 +20,11 @@ static MRecipes* sharedSingleton = nil;
 static NSString *selectAllQuery = @"SELECT id, name, description, isFavorite FROM recipes";
 
 static NSString *insertNewQuery = @"Insert into recipes (name, decription, isFavorite) values (?, ?, ?)";
-static NSString *updateQuery = @"Update recipes set name=?, Descrition=?, IsFavorite=? where id=?";
+
+static NSString *updateQuery = @"Update recipes set name=?, Description=?, IsFavorite=? where id=?";
+static NSString *updateNameQuery = @"Update recipes set name=? where id=?";
+static NSString *updateDescritionQuery = @"Update recipes set Description=? where id=?";
+
 static NSString *deleteQuery = @"Delete from recipes where id=?";
 
 static NSString *AddIngredientQuery = @"Insert into recipe_ingredients (recipe, ingredient, measurement, amount) values (?, ?, ?, ?)";
@@ -274,6 +278,153 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
     sqlite3_close(databaseLocal);
     return result == Success;
 }
+
+- (BOOL) updateRecipeName:(NSString*) newName InRecipe:(NSInteger)recipeId
+{
+    MResultCode result = GenericDBError;
+    sqlite3* databaseLocal = [MDatabase OpenDbConnection];
+    if(databaseLocal != nil)
+    {
+        int addResult = [self UpdateRecipeName:newName forRecipeId:recipeId inDB:databaseLocal];
+        if(addResult != SQLITE_OK)
+        {
+            // something went wrong, inform the user
+        }
+        else
+        {
+            if(self.allRecipesDictionary == nil)
+            {
+                [self readAllRecipesfromDB:databaseLocal];
+            }
+            else
+            {
+                MRecipe* recipeToUpdate = [self.allRecipesDictionary objectForKey:[NSNumber numberWithInteger:recipeId]];
+                recipeToUpdate.Name = newName;
+                [self.allRecipesDictionary setObject:recipeToUpdate forKey:[NSNumber numberWithInteger:recipeId]];
+            }
+            result = Success;
+        }
+    }
+    sqlite3_close(databaseLocal);
+    return result == Success;
+
+}
+
+- (BOOL) updateRecipeDescription:(NSString*) newDescription InRecipe:(NSInteger)recipeId
+{
+    MResultCode result = GenericDBError;
+    sqlite3* databaseLocal = [MDatabase OpenDbConnection];
+    if(databaseLocal != nil)
+    {
+        int addResult = [self UpdateRecipeDescription:newDescription forRecipeId:recipeId inDB:databaseLocal];
+        if(addResult != SQLITE_OK)
+        {
+            // something went wrong, inform the user
+        }
+        else
+        {
+            if(self.allRecipesDictionary == nil)
+            {
+                [self readAllRecipesfromDB:databaseLocal];
+            }
+            else
+            {
+                MRecipe* recipeToUpdate = [self.allRecipesDictionary objectForKey:[NSNumber numberWithInteger:recipeId]];
+                recipeToUpdate.Description = newDescription;
+                [self.allRecipesDictionary setObject:recipeToUpdate forKey:[NSNumber numberWithInteger:recipeId]];
+            }
+            result = Success;
+        }
+    }
+    sqlite3_close(databaseLocal);
+    return result == Success;
+}
+
+- (int) UpdateRecipeName:(NSString*)newName forRecipeId:(NSInteger)recipeId inDB:(sqlite3*)databaseLocal
+{
+    sqlite3_stmt *statement;
+    
+    int resultCode = sqlite3_prepare_v2(databaseLocal, [updateNameQuery UTF8String], -1, &statement, nil);
+    if(resultCode != SQLITE_OK)
+    {
+        NSLog(@"Failed to prepare SQLite statement for update recipe name. Error code %d", resultCode);
+        return resultCode;
+    }
+    
+    resultCode = sqlite3_bind_text(statement, 1, [newName UTF8String], -1, SQLITE_TRANSIENT);
+    if(resultCode != SQLITE_OK)
+    {
+        NSLog(@"Failed to bind the parameter to SQLite statement for update recipe name. Error code %d", resultCode);
+        return resultCode;
+    }
+    
+    resultCode = sqlite3_bind_int(statement, 2, recipeId);
+    if(resultCode != SQLITE_OK)
+    {
+        NSLog(@"Failed to bind the parameter to SQLite statement for update recipe name. Error code %d", resultCode);
+        return resultCode;
+    }
+    
+    resultCode = sqlite3_step(statement);
+    if(resultCode != SQLITE_DONE)
+    {
+        NSLog(@"Result code for execution of update recipe name was %d", resultCode);
+        return resultCode;
+    }
+    
+    // finalize (close) the sqlite statement
+    resultCode = sqlite3_finalize(statement);
+    if(resultCode != SQLITE_OK)
+    {
+        // something went wrong during sql query
+        NSLog(@"Error during finilizing update recipe name statement: %d", resultCode);
+    }
+    return resultCode;
+}
+
+- (int) UpdateRecipeDescription:(NSString*)newDescription forRecipeId:(NSInteger)recipeId inDB:(sqlite3*)databaseLocal
+{
+    sqlite3_stmt *statement;
+    
+    int resultCode = sqlite3_prepare_v2(databaseLocal, [updateDescritionQuery UTF8String], -1, &statement, nil);
+    if(resultCode != SQLITE_OK)
+    {
+        NSLog(@"Failed to prepare SQLite statement for update recipe description. Error code %d", resultCode);
+        return resultCode;
+    }
+    
+    resultCode = sqlite3_bind_text(statement, 1, [newDescription UTF8String], -1, SQLITE_TRANSIENT);
+    if(resultCode != SQLITE_OK)
+    {
+        NSLog(@"Failed to bind the parameter to SQLite statement for update recipe description. Error code %d", resultCode);
+        return resultCode;
+    }
+    
+    resultCode = sqlite3_bind_int(statement, 2, recipeId);
+    if(resultCode != SQLITE_OK)
+    {
+        NSLog(@"Failed to bind the parameter to SQLite statement for update recipe description. Error code %d", resultCode);
+        return resultCode;
+    }
+    
+    resultCode = sqlite3_step(statement);
+    if(resultCode != SQLITE_DONE)
+    {
+        NSLog(@"Result code for execution of update recipe description was %d", resultCode);
+        return resultCode;
+    }
+    
+    // finalize (close) the sqlite statement
+    resultCode = sqlite3_finalize(statement);
+    if(resultCode != SQLITE_OK)
+    {
+        // something went wrong during sql query
+        NSLog(@"Error during finilizing update recipe description statement: %d", resultCode);
+    }
+    return resultCode;
+}
+
+
 
 - (int) UpdateRecipe:(MRecipe*)recipeToUpdate inDB:(sqlite3*)databaseLocal
 {

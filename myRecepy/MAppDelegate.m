@@ -30,7 +30,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    MMenuController *menuController = [[MMenuController alloc] initWithNibName:@"MMenuController" bundle:nil];
+    MRecipesForMenuController *menuController = [[MRecipesForMenuController alloc] initWithNibName:@"MRecipesForMenuController" bundle:nil];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:menuController];
     [navigationController setNavigationBarHidden:YES];

@@ -19,4 +19,13 @@
     }
     return self;
 }
+
+- (id)initWithId:(NSInteger)ID
+{
+    self = [super init];
+    if(self) {
+        self.Id = ID;
+    }
+    return self;
+}
 @end

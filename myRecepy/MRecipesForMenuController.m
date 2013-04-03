@@ -7,11 +7,16 @@
 //
 
 #import "MRecipesForMenuController.h"
+#import "MMenuController.h"
+#import "MShoppingCart.h"
 
 @interface MRecipesForMenuController ()
 {
     NSArray* recipesForThisMenu;
     MMenu* currentMenu;
+    
+    NSArray* menus;
+    BOOL topLayerHidden;
 }
 @end
 
@@ -19,14 +24,26 @@
 
 static NSString *CellIdentifier = @"Cell";
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil MenuId:(NSInteger)MenuId
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self->currentMenu = [[MMenus Instance] getMenu:MenuId];
-        self->recipesForThisMenu = [[MMenus Instance] getRecipesForMenuId:MenuId];
+        topLayerHidden = FALSE;
+        self->menus = [[MMenus Instance] AvailableMenus];
+
+        if(menus.count > 0)
+        {
+            self->currentMenu = [menus objectAtIndex:0];
+            self->recipesForThisMenu = [[MMenus Instance] getRecipesForMenuId:currentMenu.Id];
+        }
     }
     return self;
+}
+
+- (void)viewDidUnload {
+    [self setTopLayer:nil];
+    [self setRecipesTableView:nil];
+    [super viewDidUnload];
 }
 
 - (void)viewDidLoad
@@ -73,7 +90,7 @@ static NSString *CellIdentifier = @"Cell";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    // later may want to dispose of Menus array, but I doubt it's a big deal
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -83,7 +100,14 @@ static NSString *CellIdentifier = @"Cell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self->recipesForThisMenu count];
+    if(tableView.tag == 11) {
+        return [self->menus count];
+    } else if(tableView.tag == 10) {
+        return [self->recipesForThisMenu count];
+    }
+    else {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -93,30 +117,45 @@ static NSString *CellIdentifier = @"Cell";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [[self->recipesForThisMenu objectAtIndex:indexPath.row] Name];
+    if(tableView.tag == 11) {
+        cell.textLabel.text = [[self->menus objectAtIndex:indexPath.row] Name];
+    } else if(tableView.tag == 10) {
+        cell.textLabel.text = [[self->recipesForThisMenu objectAtIndex:indexPath.row] Name];
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MRecipe* recipe = [recipesForThisMenu objectAtIndex:indexPath.row];
-    //Initialize new viewController
-    MRecipeDetailsController *detailsController = [[MRecipeDetailsController alloc] initWithNibName:@"MRecipeDetailsController" bundle:nil RecipeId:recipe.Id];
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    //Push new view to navigationController stack
-    [self.navigationController pushViewController:detailsController animated:YES];
+    if(tableView.tag == 11) {
+        [self animateLayer:0];
+        topLayerHidden = FALSE;
+        self->currentMenu = [menus objectAtIndex:indexPath.row];
+        self.navigationBar.topItem.title = self->currentMenu.Name;
+        self.lblDescription.text = self->currentMenu.Description;
+        self->recipesForThisMenu = [[MMenus Instance] getRecipesForMenuId:self->currentMenu.Id];
+        [self.recipesTableView reloadData];
+    } else {
+        MRecipe* recipe = [self->recipesForThisMenu objectAtIndex:indexPath.row];
+        //Initialize new viewController
+        MRecipeDetailsController *detailsController = [[MRecipeDetailsController alloc] initWithNibName:@"MRecipeDetailsController" bundle:nil RecipeId:recipe.Id];
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        //Push new view to navigationController stack
+        [self.navigationController pushViewController:detailsController animated:YES];
+    }   
 }
 
 - (void) AddExistingRecipe {
     MRecipeListController *addExistingRecipe = [[MRecipeListController alloc] initWithNibName:@"MRecipeListController"
                                                                                        bundle:nil
-                                                                                       MenuId:self->currentMenu.Id
-                                                                                       Parent:self];
+                                                                                       Parent:self
+                                                                                    AddToMenu:self->currentMenu.Id];
     [self.navigationController pushViewController:addExistingRecipe animated:YES];
 }
 
 - (void) ShowShoppingBag {
-    NSLog(@"%@", @"Need to show shopping bag here");
+    MShoppingCart* shoppingCart = [[MShoppingCart alloc] initWithNibName:@"MShoppingCart" bundle:nil Menu:self->currentMenu.Id];
+    [self.navigationController pushViewController:shoppingCart animated:YES];
 }
 - (IBAction)toMenuListClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -124,7 +163,37 @@ static NSString *CellIdentifier = @"Cell";
 - (void) ChildIsUnloading
 {
     self->recipesForThisMenu = [[MMenus Instance] getRecipesForMenuId:currentMenu.Id];
-    [self.tableView reloadData];
+    self->menus = [[MMenus Instance] AvailableMenus];
+    [self.recipesTableView reloadData];
+    [self.menusTableView reloadData];
+}
+
+-(void) animateLayer:(int)x
+{
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options:UIViewAnimationCurveEaseOut
+                     animations:^{
+                         CGRect topLayerFrame = self.topLayer.frame;
+                         topLayerFrame.origin.x = x;
+                         self.topLayer.frame = topLayerFrame;}
+                     completion:^(BOOL 	finished) {
+                         
+                     }
+     ];
+}
+- (IBAction)AddMenuClicked:(id)sender {
+    MMenuController* addMenu = [[MMenuController alloc] initWithNibName:@"MMenuController" bundle:nil];
+    addMenu.parent = self;
+    [self.navigationController pushViewController:addMenu animated:YES];
+}
+- (IBAction)FaceButtonClicked:(id)sender {
+    if(topLayerHidden) {
+        [self animateLayer:0];
+    } else {
+        [self animateLayer:230];
+    }
+    topLayerHidden = !topLayerHidden;
 }
 
 @end

@@ -11,16 +11,13 @@
 #import "MMenus.h"
 #import "MRecipeDetailsController.h"
 #import "MRecipesForMenuController.h"
+#import "MEnumerations.h"
 
-@interface MMenuController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MMenuController : UIViewController <UITextFieldDelegate>
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+@property (strong, nonatomic) id<MNavigationParent> parent;
+@property (weak, nonatomic) IBOutlet UITextField *nameTxtFld;
+@property (weak, nonatomic) IBOutlet UITextField *descriptionTxtFld;
 
-@property (weak, nonatomic) IBOutlet UIView *topLayer;
-@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
-@property (weak, nonatomic) IBOutlet UITableView *lowerTableView;
 
 @end

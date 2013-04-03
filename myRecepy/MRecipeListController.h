@@ -16,7 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil MenuId:(NSInteger)MenuId Parent:(id<MNavigationParent>)Parent;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil Parent:(id<MNavigationParent>)Parent AddToMenu:(NSInteger) menuId;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;

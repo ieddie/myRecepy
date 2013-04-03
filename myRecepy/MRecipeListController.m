@@ -7,6 +7,7 @@
 //
 
 #import "MRecipeListController.h"
+#import "MRecipes.h"
 
 @interface MRecipeListController ()
 {
@@ -30,14 +31,14 @@ static NSString *CellIdentifier = @"Cell";
     return self;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil MenuId:(NSInteger)MenuId Parent:(id<MNavigationParent>)Parent
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil Parent:(id<MNavigationParent>)Parent AddToMenu:(NSInteger) menuId
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self->CurrentMenuId = MenuId;
-        self->recipes = [[MMenus Instance] getRecipesNotInMenu:MenuId];
-        addingToMenu = TRUE;
+        self->recipes = [[MRecipes Instance] AvailableRecipes];
         self.parent = Parent;
+        addingToMenu = TRUE;
+        self->CurrentMenuId = menuId;
     }
     return self;
 }
@@ -45,12 +46,7 @@ static NSString *CellIdentifier = @"Cell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    if(addingToMenu) {
-        self.navigationBar.topItem.title = @"Recipes not in yet";
-    } else {
-        self.navigationBar.topItem.title = @"Recipes";
-    }
+    self.navigationBar.topItem.title = @"Recipes";
 
     // these numbers would not work for iPad, need to take idiom into effect
     UIToolbar *tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 40.0f, 44.0f)];

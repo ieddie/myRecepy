@@ -20,13 +20,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil MenuId:(NSInteger)MenuId;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 - (void) ChildIsUnloading;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *lblDescription;
 
 @property (weak, nonatomic) IBOutlet UINavigationBar* navigationBar;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *recipesTableView;
+@property (weak, nonatomic) IBOutlet UITableView *menusTableView;
+
+
+@property (weak, nonatomic) IBOutlet UIView *topLayer;
 
 @end

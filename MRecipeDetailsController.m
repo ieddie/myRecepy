@@ -7,6 +7,7 @@
 //
 
 #import "MRecipeDetailsController.h"
+#import "MRecipes.h"
 
 @interface MRecipeDetailsController ()
 {
@@ -14,7 +15,8 @@
     MIngredient* ingredientInProgress;
     MMeasurement* measurementInProgree;
     double amountInProgress;
-    BOOL showAddButton;
+    BOOL isNewRecipeBeingAdded;
+    BOOL currentIsFav;
 }
 
 @end
@@ -23,13 +25,14 @@
 
 static NSString *CellIdentifier = @"Cell";
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil RecipeId:(NSInteger)recipeId
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil RecipeId:(NSInteger)RecipeId
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self->recipe = [[MRecipes Instance] getRecipeWithIngredientsForId:recipeId];
+        self->recipe = [[MRecipes Instance] getRecipeWithIngredientsForId:RecipeId];
         self.ingredientToAddId = 0;
-        self->showAddButton = FALSE;
+        self->isNewRecipeBeingAdded = FALSE;
+        self->currentIsFav = self->recipe.RecipeDetails.IsFavorite;
     }
     return self;
 }
@@ -39,7 +42,8 @@ static NSString *CellIdentifier = @"Cell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.ingredientToAddId = 0;
-        self->showAddButton = TRUE;
+        self->isNewRecipeBeingAdded = TRUE;
+        self->currentIsFav = FALSE;
     }
     return self;
 }
@@ -54,6 +58,12 @@ static NSString *CellIdentifier = @"Cell";
     if(self.ingredientToAddId != 0)
     {
         // push controller to select measurement
+    }
+    
+    if(self->isNewRecipeBeingAdded) {
+        [self.btnback setTitle:@"Add" forState:UIControlStateNormal];
+    } else {
+        [self.btnback setTitle:@"Close" forState:UIControlStateNormal];
     }
 }
 
@@ -96,35 +106,76 @@ static NSString *CellIdentifier = @"Cell";
     return [UIView new];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    if(textField.tag == 10) {
+        textField.text = self->recipe.RecipeDetails.Name;
+    } else if(textField.tag == 11) {
+        textField.text = self->recipe.RecipeDetails.Description;
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if(textField.tag == 10) {
+        [[MRecipes Instance] updateRecipeName:textField.text InRecipe:self->recipe.RecipeDetails.Id];
+    } else if(textField.tag == 11) {
+        [[MRecipes Instance] updateRecipeDescription:textField.text InRecipe:self->recipe.RecipeDetails.Id];
+    }
+}
+
 - (IBAction)CloseRecipe:(id)sender {
+    // if this is a "add new recipe" - run the add operation on db
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)addNewIngredientClick:(id)sender {
-    MIngredientsController *listOfIngredientsController = [[MIngredientsController alloc] initWithNibName:@"MListOfIngridients" bundle:nil];
-    listOfIngredientsController.delegate = self;
+    MIngredientsController *listOfIngredientsController = [[MIngredientsController alloc] initWithNibName:@"MListOfIngridients"
+                                                                                                   bundle:nil
+                                                                                                   Parent:self
+                                                                                                   Recipe:self->recipe.RecipeDetails.Id];
     //Push new view to navigationController stack
     [self.navigationController pushViewController:listOfIngredientsController animated:YES];
 }
 
 - (IBAction)setFav:(id)sender {
-    NSInteger recipeId = recipe.RecipeDetails.Id;
-    if (recipe.RecipeDetails.IsFavorite) {
-        [[MRecipes Instance] unmarkRecipeAsFavorite:recipeId];
+    if(!isNewRecipeBeingAdded)
+    {
+        NSInteger recipeId = self->recipe.RecipeDetails.Id;
+        if (recipe.RecipeDetails.IsFavorite) {
+            [[MRecipes Instance] unmarkRecipeAsFavorite:recipeId];
+        }
+        else {
+            [[MRecipes Instance] markRecipeAsFavorite:recipeId];
+        }
+        self->recipe = [[MRecipes Instance] getRecipeWithIngredientsForId:recipeId];
     }
-    else {
-        [[MRecipes Instance] markRecipeAsFavorite:recipeId];
-    }
-    self->recipe = [[MRecipes Instance] getRecipeWithIngredientsForId:recipeId];
+    self->currentIsFav = !self->currentIsFav;
     [self setIsFavImage];
 }
 
 -(void) setIsFavImage
 {
-    if(self->recipe.RecipeDetails.IsFavorite) {
+    if(self->currentIsFav) {
         [self.isFavButton setBackgroundImage:[UIImage imageNamed: @"star_enabled_brushed.png"] forState:UIControlStateNormal];
     } else {
         [self.isFavButton setBackgroundImage:[UIImage imageNamed: @"star_disabled_brushed.png"] forState:UIControlStateNormal];
     }
+}
+
+- (void)viewDidUnload {
+    [self setBtnback:nil];
+    [self setIngredientsTable:nil];
+    [super viewDidUnload];
+}
+
+- (void) ChildIsUnloading
+{
+    self->recipe = [[MRecipes Instance] getRecipeWithIngredientsForId:self->recipe.RecipeDetails.Id];
+    [self.ingredientsTable reloadData];
 }
 
 @end
