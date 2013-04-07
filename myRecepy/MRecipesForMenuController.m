@@ -17,6 +17,8 @@
     
     NSArray* menus;
     BOOL topLayerHidden;
+    
+    BOOL hidingNavItemsForFavorites;
 }
 @end
 
@@ -29,9 +31,10 @@ static NSString *CellIdentifier = @"Cell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         topLayerHidden = FALSE;
-        self->menus = [[MMenus Instance] AvailableMenus];
-
-        if(menus.count > 0)
+        NSMutableArray* allMenusWithFavorites = [NSMutableArray arrayWithArray:[[MMenus Instance] AvailableMenus]];
+        [allMenusWithFavorites addObject:[[MMenu alloc] initWithId:-1 Name:@"Favorite Recipes" Description:@""]];
+        self->menus = [NSArray arrayWithArray:allMenusWithFavorites];
+        if(menus.count > 1)
         {
             self->currentMenu = [menus objectAtIndex:0];
             self->recipesForThisMenu = [[MMenus Instance] getRecipesForMenuId:currentMenu.Id];
@@ -53,39 +56,9 @@ static NSString *CellIdentifier = @"Cell";
     self.navigationBar.topItem.title = self->currentMenu.Name;
     self.lblDescription.text = self->currentMenu.Description;
     
-    // these numbers would not work for iPad, need to take idiom into effect
-    UIToolbar *tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 80.0f, 44.0f)];
-    tools.clearsContextBeforeDrawing = NO;
-    tools.clipsToBounds = NO;
-    tools.barStyle = -1; // clear background
+    [self addNavigationButtons];
     
-    NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:3];
-    
-    UIBarButtonItem* buttonPlus = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                target:self
-                                                                                action:@selector(AddExistingRecipe)];
-    [buttons addObject:buttonPlus];
-    
-    // Create a spacer.
-    UIBarButtonItem* spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                                                            target:nil
-                                                                            action:nil];
-    spacer.width = 12.0f;
-    [buttons addObject:spacer];
-    
-    UIBarButtonItem *buttonShoppingBag = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shopping_bag.png"]
-                                                                          style:UIBarButtonItemStylePlain
-                                                                         target:self
-                                                                         action:@selector(ShowShoppingBag)];
-    [buttons addObject:buttonShoppingBag];
-    
-    // Add buttons to toolbar and toolbar to nav bar.
-    [tools setItems:buttons animated:NO];
-    
-    UIBarButtonItem *allButtonsInOne = [[UIBarButtonItem alloc] initWithCustomView:tools];
-    UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
-    currentItem.rightBarButtonItem = allButtonsInOne;
-}
+    }
 
 - (void)didReceiveMemoryWarning
 {
@@ -130,10 +103,25 @@ static NSString *CellIdentifier = @"Cell";
     if(tableView.tag == 11) {
         [self animateLayer:0];
         topLayerHidden = FALSE;
+        
+        
         self->currentMenu = [menus objectAtIndex:indexPath.row];
+        if(self->currentMenu.Id == -1) {
+            self->hidingNavItemsForFavorites = TRUE;
+            UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
+            currentItem.rightBarButtonItem = nil;
+            self->recipesForThisMenu = [[MRecipes Instance] FavoriteRecipes];
+        } else {
+            if(self->hidingNavItemsForFavorites)
+            {
+                [self addNavigationButtons];
+                self->hidingNavItemsForFavorites = FALSE;
+            }
+            self->recipesForThisMenu = [[MMenus Instance] getRecipesForMenuId:self->currentMenu.Id];
+        }
         self.navigationBar.topItem.title = self->currentMenu.Name;
         self.lblDescription.text = self->currentMenu.Description;
-        self->recipesForThisMenu = [[MMenus Instance] getRecipesForMenuId:self->currentMenu.Id];
+
         [self.recipesTableView reloadData];
     } else {
         MRecipe* recipe = [self->recipesForThisMenu objectAtIndex:indexPath.row];
@@ -185,6 +173,43 @@ static NSString *CellIdentifier = @"Cell";
                      }
      ];
 }
+
+-(void) addNavigationButtons
+{
+    // these numbers would not work for iPad, need to take idiom into effect
+    UIToolbar *tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 80.0f, 44.0f)];
+    tools.clearsContextBeforeDrawing = NO;
+    tools.clipsToBounds = NO;
+    tools.barStyle = -1; // clear background
+    
+    NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:3];
+    
+    UIBarButtonItem* buttonPlus = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                target:self
+                                                                                action:@selector(AddExistingRecipe)];
+    [buttons addObject:buttonPlus];
+    
+    // Create a spacer.
+    UIBarButtonItem* spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                            target:nil
+                                                                            action:nil];
+    spacer.width = 12.0f;
+    [buttons addObject:spacer];
+    
+    UIBarButtonItem *buttonShoppingBag = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shopping_bag.png"]
+                                                                          style:UIBarButtonItemStylePlain
+                                                                         target:self
+                                                                         action:@selector(ShowShoppingBag)];
+    [buttons addObject:buttonShoppingBag];
+    
+    // Add buttons to toolbar and toolbar to nav bar.
+    [tools setItems:buttons animated:NO];
+    
+    UIBarButtonItem *allButtonsInOne = [[UIBarButtonItem alloc] initWithCustomView:tools];
+    UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
+    currentItem.rightBarButtonItem = allButtonsInOne;
+}
+
 - (IBAction)AddMenuClicked:(id)sender {
     MMenuController* addMenu = [[MMenuController alloc] initWithNibName:@"MMenuController" bundle:nil];
     addMenu.parent = self;

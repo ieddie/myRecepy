@@ -67,6 +67,19 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
     return [NSArray arrayWithArray:mutableArray];
 }
 
+- (NSArray*) FavoriteRecipes
+{
+    NSMutableArray *mutableArray = [NSMutableArray arrayWithCapacity:self.allRecipesDictionary.count];
+    for (NSString* key in self.allRecipesDictionary) {
+        MRecipe* recipe = [self.allRecipesDictionary objectForKey:key];
+        if(recipe.IsFavorite)
+        {
+            [mutableArray addObject:recipe];
+        }
+    }
+    return [NSArray arrayWithArray:mutableArray];
+}
+
 - (MResultCode) readAllRecipesfromDB:(sqlite3*) databaseLocal
 {
     sqlite3_stmt *statement;

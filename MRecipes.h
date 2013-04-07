@@ -19,6 +19,8 @@
 
 - (NSArray*) AvailableRecipes;
 
+- (NSArray*) FavoriteRecipes;
+
 - (MRecipeWithIngredients*) getRecipeWithIngredientsForId:(NSInteger)recipeId;
 - (MRecipe*) getRecipeById:(NSInteger)recipeId;
 
