@@ -16,7 +16,6 @@
     NSMutableArray* ingrSearchResult;
     NSArray* ingredients;
     NSInteger counter;
-    NSInteger recipeId;
     
     __weak IBOutlet UITableView *ingredienttable;
 }
@@ -26,13 +25,12 @@
 
 static NSString *CellIdentifier = @"Cell";
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil Parent:(id<MNavigationParent>)parent Recipe:(NSInteger)RecipeId
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil Parent:(id<MParentWithNewIngredient>)parent
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self->ingrSearchResult = [[NSMutableArray alloc] init];
         self->ingredients = [[MIngredients Instance] availableIngredients];
-        self->recipeId = RecipeId;
         [self setParent:parent];
     }
     return self;
@@ -146,8 +144,8 @@ static NSString *CellIdentifier = @"Cell";
     MMeasurement* measurement = [[MMeasurement alloc] initWithId:1];
     MIngredient* ingredientToAdd = [ingredients objectAtIndex:indexPath.row];
     MIngredientWithAmount* ingredientWithAmountToAdd = [[MIngredientWithAmount alloc] initWithIngredient:ingredientToAdd Amount:1.0f Measurement:measurement];
-    [[MRecipes Instance] addIngredient:ingredientWithAmountToAdd toRecipeWithId:self->recipeId];
-    [self.Parent ChildIsUnloading];
+    
+    [self.Parent AddNewIngredient:ingredientWithAmountToAdd];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

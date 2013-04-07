@@ -19,7 +19,8 @@ static MRecipes* sharedSingleton = nil;
 
 static NSString *selectAllQuery = @"SELECT id, name, description, isFavorite FROM recipes";
 
-static NSString *insertNewQuery = @"Insert into recipes (name, decription, isFavorite) values (?, ?, ?)";
+static NSString *insertNewQuery = @"Insert into recipes (name, description, isFavorite) values (?, ?, ?)";
+static NSString *getLastId = @"Select MAX(ID) from recipes";
 
 static NSString *updateQuery = @"Update recipes set name=?, Description=?, IsFavorite=? where id=?";
 static NSString *updateNameQuery = @"Update recipes set name=? where id=?";
@@ -126,6 +127,17 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
     return fullRecipe;
 }
 
+- (MRecipe*) getRecipeById:(NSInteger)recipeId
+{
+    if(self.allRecipesDictionary == nil)
+    {
+        sqlite3* databaseLocal = [MDatabase OpenDbConnection];
+        [self readAllRecipesfromDB:databaseLocal];
+        sqlite3_close(databaseLocal);
+    }
+    return [self.allRecipesDictionary objectForKey:[NSNumber numberWithInt:recipeId]];
+}
+
 - (MResultCode) getIngredientsForRecipe:(MRecipeWithIngredients**) recipeToAddIngredients fromDB:(sqlite3*) database
 {
     sqlite3_stmt *statement;
@@ -166,9 +178,9 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
     return Success;
 }
 
-- (MResultCode) addNewRecipe:(MRecipe *)newRecipe;
+- (NSInteger) addNewRecipe:(MRecipe *)newRecipe;
 {
-    MResultCode result = GenericDBError;
+    NSInteger result = 0;
     sqlite3* databaseLocal = [MDatabase OpenDbConnection];
     if(databaseLocal != nil)
     {
@@ -178,11 +190,12 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
             // something went wrong, inform the user
             if(addResult == SQLITE_CONSTRAINT)
             {
-                result = ContraintViolation;
+                NSLog(@"%@", @"Constraint violation during adding new recipe");
             }
         }
         else
         {
+            result = [self getLastIdForRecipe:databaseLocal];
             if(self.allRecipesDictionary == nil)
             {
                 [self readAllRecipesfromDB:databaseLocal];
@@ -190,9 +203,9 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
             else
             {
                 // update the in-memory version with new recipe
+                newRecipe.Id = result;
                 [self.allRecipesDictionary setObject:newRecipe forKey:[NSNumber numberWithInteger:newRecipe.Id]];
             }
-            result = Success;
         }
     }
     sqlite3_close(databaseLocal);
@@ -248,7 +261,39 @@ static NSString *getIngredientsForRecipeQuery = @"Select ingr.Id, ingr.Name, mea
         NSLog(@"Error during finilizing add new recipe statement: %d", resultCode);
     }
     return resultCode;
+    
 }
+
+-(int) getLastIdForRecipe:(sqlite3 *) db
+{
+    sqlite3_stmt *statementGetId;
+    
+    int resultCode = sqlite3_prepare_v2(db, [getLastId UTF8String], -1, &statementGetId, nil);
+    if(resultCode != SQLITE_OK)
+    {
+        NSLog(@"Failed to prepare SQLite statement to get last id for recipes. Error code %d", resultCode);
+        return -1;
+    }
+    
+    resultCode = sqlite3_step(statementGetId);
+    if(resultCode != SQLITE_ROW)
+    {
+        NSLog(@"Couldn't get max id from recipes. Code %d", resultCode);
+        return -1;
+    }
+    
+    int recipeId = sqlite3_column_int(statementGetId, 0);
+    
+    // finalize (close) the sqlite statement
+    resultCode = sqlite3_finalize(statementGetId);
+    if(resultCode != SQLITE_OK)
+    {
+        // something went wrong during sql query
+        NSLog(@"Error during fnilizing get last id statement: %d", resultCode);
+    }
+    return recipeId;
+}
+
 
 - (BOOL) updateRecipe:(MRecipe*) recipeToUpdate
 {

@@ -20,8 +20,9 @@
 - (NSArray*) AvailableRecipes;
 
 - (MRecipeWithIngredients*) getRecipeWithIngredientsForId:(NSInteger)recipeId;
+- (MRecipe*) getRecipeById:(NSInteger)recipeId;
 
-- (MResultCode) addNewRecipe:(MRecipe *)recipeToAdd;
+- (NSInteger) addNewRecipe:(MRecipe *)recipeToAdd;
 
 - (BOOL) updateRecipeName:(NSString*) newName InRecipe:(NSInteger)recipeId;
 - (BOOL) updateRecipeDescription:(NSString*) newDescription InRecipe:(NSInteger)recipeId;

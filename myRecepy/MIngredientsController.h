@@ -17,15 +17,14 @@
 {
     BOOL searching;
     BOOL letUserSelectRow;
-
 }
 
-@property (strong, nonatomic) id<MNavigationParent> Parent;
+@property (strong, nonatomic) id<MParentWithNewIngredient> Parent;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil Parent:(id<MNavigationParent>)parent Recipe:(NSInteger)RecipeId;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil Parent:(id<MParentWithNewIngredient>)parent;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;

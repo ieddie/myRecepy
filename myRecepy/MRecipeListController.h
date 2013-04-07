@@ -12,9 +12,10 @@
 #import "MMenus.h"
 #import "MEnumerations.h"
 
-@interface MRecipeListController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MRecipeListController : UIViewController <UITableViewDelegate, UITableViewDataSource, MNavigationParent>
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
+@property (weak, nonatomic) IBOutlet UITableView *RecipeListTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil Parent:(id<MNavigationParent>)Parent AddToMenu:(NSInteger) menuId;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
@@ -24,6 +25,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 
+-(void) ChildIsUnloading;
 @property(weak, nonatomic) id<MNavigationParent> parent;
 
 @end

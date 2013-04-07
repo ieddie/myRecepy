@@ -138,7 +138,10 @@ static NSString *CellIdentifier = @"Cell";
     } else {
         MRecipe* recipe = [self->recipesForThisMenu objectAtIndex:indexPath.row];
         //Initialize new viewController
-        MRecipeDetailsController *detailsController = [[MRecipeDetailsController alloc] initWithNibName:@"MRecipeDetailsController" bundle:nil RecipeId:recipe.Id];
+        MRecipeDetailsController *detailsController = [[MRecipeDetailsController alloc] initWithNibName:@"MRecipeDetailsController"
+                                                                                                 bundle:nil
+                                                                                                 Parent:self
+                                                                                               RecipeId:recipe.Id];
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
         //Push new view to navigationController stack
         [self.navigationController pushViewController:detailsController animated:YES];

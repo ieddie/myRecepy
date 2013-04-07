@@ -17,3 +17,8 @@ typedef enum {
 -(void) ChildIsUnloading;
 @end
 
+@protocol MParentWithNewIngredient
+@required
+-(void) AddNewIngredient:(id) newIngredient;
+@end
+

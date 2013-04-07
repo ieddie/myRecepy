@@ -117,6 +117,7 @@ static NSString *CellIdentifier = @"Cell";
     if(!addingToMenu) {
         MRecipeDetailsController *detailsController = [[MRecipeDetailsController alloc] initWithNibName:@"MRecipeDetailsController"
                                                                                                  bundle:nil
+                                                                                                 Parent:self
                                                                                                RecipeId:recipe.Id];
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
         [self.navigationController pushViewController:detailsController animated:YES];
@@ -129,7 +130,8 @@ static NSString *CellIdentifier = @"Cell";
 
 - (void) AddNewRecipe {
     MRecipeDetailsController *addNewRecipeController = [[MRecipeDetailsController alloc] initWithNibName:@"MRecipeDetailsController"
-                                                                                                  bundle:nil];
+                                                                                                  bundle:nil
+                                                                                                  Parent:self];
     [self.navigationController pushViewController:addNewRecipeController
                                          animated:YES];
 }
@@ -142,4 +144,13 @@ static NSString *CellIdentifier = @"Cell";
     NSLog(@"%@", @"Need to show shopping bag here");
 }
 
+-(void) ChildIsUnloading {
+    self->recipes = [[MRecipes Instance] AvailableRecipes];
+    [self.RecipeListTableView reloadData];
+}
+
+- (void)viewDidUnload {
+    [self setRecipeListTableView:nil];
+    [super viewDidUnload];
+}
 @end
