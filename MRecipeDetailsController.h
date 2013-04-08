@@ -16,8 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txfName;
 @property (weak, nonatomic) IBOutlet UITextField *txfDescription;
 
-@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (weak, nonatomic) IBOutlet UIButton *isFavButton;
+@property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnback;
 @property (weak, nonatomic) IBOutlet UITableView *ingredientsTable;

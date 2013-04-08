@@ -31,9 +31,7 @@ static NSString *CellIdentifier = @"Cell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         topLayerHidden = FALSE;
-        NSMutableArray* allMenusWithFavorites = [NSMutableArray arrayWithArray:[[MMenus Instance] AvailableMenus]];
-        [allMenusWithFavorites addObject:[[MMenu alloc] initWithId:-1 Name:@"Favorite Recipes" Description:@""]];
-        self->menus = [NSArray arrayWithArray:allMenusWithFavorites];
+        [self getAllMenus];
         if(menus.count > 1)
         {
             self->currentMenu = [menus objectAtIndex:0];
@@ -154,7 +152,7 @@ static NSString *CellIdentifier = @"Cell";
 - (void) ChildIsUnloading
 {
     self->recipesForThisMenu = [[MMenus Instance] getRecipesForMenuId:currentMenu.Id];
-    self->menus = [[MMenus Instance] AvailableMenus];
+    [self getAllMenus];
     [self.recipesTableView reloadData];
     [self.menusTableView reloadData];
 }
@@ -222,6 +220,13 @@ static NSString *CellIdentifier = @"Cell";
         [self animateLayer:230];
     }
     topLayerHidden = !topLayerHidden;
+}
+
+- (void) getAllMenus
+{
+    NSMutableArray* allMenusWithFavorites = [NSMutableArray arrayWithArray:[[MMenus Instance] AvailableMenus]];
+    [allMenusWithFavorites addObject:[[MMenu alloc] initWithId:-1 Name:@"Favorite Recipes" Description:@""]];
+    self->menus = [NSArray arrayWithArray:allMenusWithFavorites];
 }
 
 @end

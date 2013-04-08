@@ -115,7 +115,6 @@
 						<array key="IBUIItems">
 							<object class="IBUINavigationItem" id="296035332">
 								<reference key="IBUINavigationBar" ref="800014481"/>
-								<string key="IBUITitle"/>
 								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="1017596213">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									<int key="IBUIStyle">1</int>
@@ -275,14 +274,6 @@
 			<array class="NSMutableArray" key="connectionRecords">
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">navBar</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="800014481"/>
-					</object>
-					<int key="connectionID">61</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">view</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="191373211"/>
@@ -328,6 +319,14 @@
 						<reference key="destination" ref="348737075"/>
 					</object>
 					<int key="connectionID">146</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">navBar</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="296035332"/>
+					</object>
+					<int key="connectionID">153</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -510,7 +509,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">151</int>
+			<int key="maxID">153</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -519,21 +518,11 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="CloseRecipe:">id</string>
-						<string key="addNewIngredientClick:">id</string>
-						<string key="nameClickedOutside:">id</string>
 						<string key="setFav:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="CloseRecipe:">
 							<string key="name">CloseRecipe:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="addNewIngredientClick:">
-							<string key="name">addNewIngredientClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="nameClickedOutside:">
-							<string key="name">nameClickedOutside:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="setFav:">
@@ -545,7 +534,7 @@
 						<string key="btnback">UIButton</string>
 						<string key="ingredientsTable">UITableView</string>
 						<string key="isFavButton">UIButton</string>
-						<string key="navBar">UINavigationBar</string>
+						<string key="navBar">UINavigationItem</string>
 						<string key="txfDescription">UITextField</string>
 						<string key="txfName">UITextField</string>
 					</dictionary>
@@ -564,7 +553,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="navBar">
 							<string key="name">navBar</string>
-							<string key="candidateClassName">UINavigationBar</string>
+							<string key="candidateClassName">UINavigationItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="txfDescription">
 							<string key="name">txfDescription</string>

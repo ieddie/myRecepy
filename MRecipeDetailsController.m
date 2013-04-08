@@ -48,6 +48,9 @@ static NSString *CellIdentifier = @"Cell";
         self->ingredientsForRecipe = [[NSMutableArray alloc] init];
 
         self->isNewRecipeBeingAdded = TRUE;
+        
+
+        
         self->currentIsFav = FALSE;
         self.Parent = parent;
     }
@@ -63,14 +66,17 @@ static NSString *CellIdentifier = @"Cell";
     self.txfDescription.clearsOnBeginEditing = FALSE;
     [self setIsFavImage];
     
-
-    
     if(self->isNewRecipeBeingAdded) {
-        [self.btnback setTitle:@"Add" forState:UIControlStateNormal];
-    } else {
-        [self.btnback setTitle:@"Close" forState:UIControlStateNormal];
+        UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [addButton setTitle:@"Add Recipe" forState:UIControlStateNormal];
+        [addButton addTarget:self
+                      action:@selector(AddRecipe)
+            forControlEvents:UIControlEventTouchUpInside];
+        [addButton setFrame:CGRectMake(0, 0, 80, 35)];
+        self.navBar.titleView = addButton;
     }
     
+    [self.btnback setTitle:@"Close" forState:UIControlStateNormal];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
@@ -137,12 +143,29 @@ static NSString *CellIdentifier = @"Cell";
         }	
     }
 }
-
-- (IBAction)CloseRecipe:(id)sender {
+- (void)AddRecipe {
     if(self->isNewRecipeBeingAdded) {
+        if(self.txfName.text.length == 0) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Name field error"
+                                                            message:@"Recipe name can't be blank"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+        if (self.txfDescription.text.length == 0) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Description field error"
+                                                            message:@"Recipe description can't be blank"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
         NSInteger newRecipeId = [[MRecipes Instance] addNewRecipe:[[MRecipe alloc] initWithName:self.txfName.text
-                                                                                   Description:self.txfDescription.text
-                                                                                    IsFavorite:self->currentIsFav]];
+                                                                                    Description:self.txfDescription.text
+                                                                                     IsFavorite:self->currentIsFav]];
         if(self->ingredientsForRecipe != nil && [self->ingredientsForRecipe count] > 0) {
             for (MIngredientWithAmount* ingredient in self->ingredientsForRecipe) {
                 [[MRecipes Instance] addIngredient:ingredient toRecipeWithId:newRecipeId];
@@ -153,7 +176,11 @@ static NSString *CellIdentifier = @"Cell";
     // if this is a "add new recipe" - run the add operation on db
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)CloseRecipe:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (IBAction)addNewIngredientClick:(id)sender {
+    [self dismissKeyboard];
     MIngredientsController *listOfIngredientsController = [[MIngredientsController alloc] initWithNibName:@"MListOfIngridients"
                                                                                                    bundle:nil
                                                                                                    Parent:self];
@@ -189,6 +216,7 @@ static NSString *CellIdentifier = @"Cell";
 - (void)viewDidUnload {
     [self setBtnback:nil];
     [self setIngredientsTable:nil];
+    [self setNavBar:nil];
     [super viewDidUnload];
 }
 
