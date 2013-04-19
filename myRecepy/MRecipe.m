@@ -25,4 +25,19 @@
     return self;
 }
 
+-(id) initWithName:(NSString*)name Description:(NSString*)description IsFavorite:(NSInteger) isFavorite
+{
+    self = [super init];
+    if(self) {
+        [self setName:[NSString stringWithString:name]];
+        [self setDescription:[NSString stringWithString:description]];
+        BOOL isFavoriteBool = TRUE;
+        if (isFavorite != 1) {
+            isFavoriteBool = FALSE;
+        }
+        [self setIsFavorite:isFavoriteBool];
+    }
+    return self;
+}
+
 @end

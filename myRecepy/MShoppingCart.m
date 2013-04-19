@@ -35,6 +35,7 @@ static NSString *CellIdentifier = @"Cell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self addNavigationButtons];
     
 }
 
@@ -66,22 +67,45 @@ static NSString *CellIdentifier = @"Cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    tableView.separatorColor = [UIColor colorWithRed:219.0/255.0f green:219.0/255.0f blue:219.0/255.0f alpha:0.5];
+    //tableView.separatorColor = [UIColor clearColor];
+    NSDictionary* strikeThrough = @{
+                                 NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
+                                 };
+    UIImageView *favIcon;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
+        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"table-products-bg.png"]];
+        cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
+        
+        favIcon = [[UIImageView alloc] initWithFrame:CGRectMake(271, 12, 16.5, 14.5)];
+        favIcon.tag = 12;
+        [cell.contentView addSubview:favIcon];
     }
     MIngredientFromRecipeInMenu* ingredient = nil;
     if(indexPath.section == 0) {
         ingredient = [self->notBought objectAtIndex:indexPath.row];
+        if(ingredient != nil)
+        {            
+            favIcon.image = [UIImage imageNamed:@"products-checkbox.png"];
+            cell.textLabel.text = ingredient.Ingredient.Ingredient.Name;
+        }
     } else  {
         ingredient = [self->bought objectAtIndex:indexPath.row];
-    }
-    if(ingredient != nil)
-    {
-        cell.textLabel.text = ingredient.Ingredient.Ingredient.Name;
+        if(ingredient != nil)
+        {
+            favIcon.image = [UIImage imageNamed:@"products-checkbox-checked.png"];
+            NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:ingredient.Ingredient.Ingredient.Name attributes:strikeThrough];
+            cell.textLabel.attributedText = attrText;
+        }
     }
     return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return  39;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -99,7 +123,6 @@ static NSString *CellIdentifier = @"Cell";
         // need to mark ingredient as "to buy"
         itemWasInToBuySection = [self->bought objectAtIndex:indexPath.row];
         markAsBought = FALSE;
-
     }
     [[MMenus Instance] markAsBought:markAsBought RecipeIngredientId:itemWasInToBuySection.RecipeIngredientId MenuRecipeId:itemWasInToBuySection.RecipeMenuId];
     self->bought = [[MMenus Instance] getBoughtIngredientsForMenuId:self->menuId];
@@ -115,8 +138,32 @@ static NSString *CellIdentifier = @"Cell";
         return @"Already Bought";
     }
 }
-- (IBAction)backButtonClicked:(id)sender {
+-(void) addNavigationButtons
+{
+    UIBarButtonItem* buttonBack = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain                                                                            target:self action:@selector(backButtonClicked)];
+    UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
+    currentItem.leftBarButtonItem = buttonBack;
+}
+- (void)backButtonClicked {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+// table view header modificaton
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,tableView.frame.size.width,30)];
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, headerView.frame.size.width-120.0, headerView.frame.size.height)];
+    [headerLabel setBackgroundColor:[UIColor clearColor]];
+    headerLabel.font = [UIFont fontWithName:@"Dakota" size:18];
+    [headerLabel setTextColor:[UIColor colorWithRed:69.0/255.0f green:69.0/255.0f blue:69.0/255.0f alpha:0.58]];
+    if(section == 0) {
+        headerLabel.text = @"Products to Buy";
+    } else {
+        headerLabel.text = @"Already Bought";
+    }
+    [headerView addSubview:headerLabel];
+    
+    return headerView;
+}
+-(float)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {    
+    return  46.0;
+}
 @end

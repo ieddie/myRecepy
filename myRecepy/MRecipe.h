@@ -11,10 +11,7 @@
 
 @interface MRecipe : NSObject
 
-//-(id) initWithName:(NSString*)name;
-//-(id) initWithName:(NSString*)name Description:(NSString*)description;
-//-(id) initWithName:(NSString*)name FirstIngredient:(NSString*) firstIngredient;
-
+-(id) initWithName:(NSString*)name Description:(NSString*)description IsFavorite:(NSInteger) isFavorite;
 -(id) initWithId:(NSInteger)Id Name:(NSString*)name Description:(NSString*)description IsFavorite:(NSInteger) isFavorite;
 
 @property (nonatomic) NSInteger Id;

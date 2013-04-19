@@ -347,7 +347,7 @@ static NSString *markIngredientForMenu = @"Update shoppingList set isBought=? wh
     sqlite3_close(databaseLocal);
 }
 
--(void) addRecipe:(NSInteger)recipeIdToAdd ToMenu:(NSInteger)menuId
+-(void) addRecipe:(NSInteger)recipeIdToAdd ToMenu:(NSInteger)menuId 
 {
     sqlite3* databaseLocal = [MDatabase OpenDbConnection];
     if(databaseLocal == nil)
