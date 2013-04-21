@@ -32,9 +32,25 @@
     
     MRecipesForMenuController *menuController = [[MRecipesForMenuController alloc] initWithNibName:@"MRecipesForMenuController" bundle:nil];
     
+    //--------- Navbar Background -------------
+    UIImage *navBackgroundImage = [UIImage imageNamed:@"nav-bg.png"];
+    [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
+    
+    // TableView Background
+    UIColor *tableViewBackgroundImage = [UIColor colorWithPatternImage:[UIImage imageNamed:@"body-bg.png"]];
+    [[UITableView appearance] setBackgroundColor:tableViewBackgroundImage];
+
+    // Change the appearance of back button
+    UIImage *backButtonImage = [[UIImage imageNamed:@"button-bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    // Change the appearance of other navigation button
+    UIImage *barButtonImage = [[UIImage imageNamed:@"button-bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)];
+    [[UIBarButtonItem appearance] setBackgroundImage:barButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:menuController];
     [navigationController setNavigationBarHidden:YES];
     self.window.rootViewController = navigationController;
+
     
     return YES;
 }
@@ -182,5 +198,7 @@
         NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
     }
 }
+
+
 
 @end

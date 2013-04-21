@@ -1,7 +1,7 @@
 //
 //  MEnumerations.h
 //  myRecipeList
-// version from temp2 branch
+//
 //  Created by Eduard Kantsevich on 1/22/13.
 //  Copyright (c) 2013 Med. All rights reserved.
 //

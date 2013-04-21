@@ -12,6 +12,7 @@
 #import "MRecipeDetailsController.h"
 #import "MRecipeListController.h"
 #import "MEnumerations.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface MRecipesForMenuController : UIViewController <UITableViewDelegate, UITableViewDataSource, MNavigationParent>
 
@@ -27,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblDescription;
 
 @property (weak, nonatomic) IBOutlet UINavigationBar* navigationBar;
+@property (weak, nonatomic) IBOutlet UINavigationBar* navigationBarMenu;
+
 @property (weak, nonatomic) IBOutlet UITableView *recipesTableView;
 @property (weak, nonatomic) IBOutlet UITableView *menusTableView;
 

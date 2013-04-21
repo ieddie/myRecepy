@@ -11,12 +11,12 @@
 #import "MRecipes.h"
 #import "MIngredientsController.h"
 
-@interface MRecipeDetailsController : UIViewController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, MParentWithNewIngredient>
+@interface MRecipeDetailsController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, MParentWithNewIngredient>
 
 @property (weak, nonatomic) IBOutlet UITextField *txfName;
-@property (weak, nonatomic) IBOutlet UITextField *txfDescription;
+@property (weak, nonatomic) IBOutlet UITextView *txfDescription;
 
-@property (weak, nonatomic) IBOutlet UIButton *isFavButton;
+@property (weak, nonatomic) IBOutlet UIButton *favIconBtn;
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnback;
@@ -31,8 +31,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
+- (IBAction)editAction:(id)sender;
 - (IBAction)CloseRecipe:(id)sender;
-- (IBAction)setFav:(id)sender;
+- (void)setFav;
 
 - (void) AddNewIngredient:(id)ingredient;
 

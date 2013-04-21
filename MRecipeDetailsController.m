@@ -17,6 +17,8 @@
     double amountInProgress;
     BOOL isNewRecipeBeingAdded;
     BOOL currentIsFav;
+    BOOL currentlyEditingName;
+    BOOL currentlyEditingDesc;
 }
 
 @end
@@ -36,6 +38,8 @@ static NSString *CellIdentifier = @"Cell";
         self->currentIsFav = self->recipe.IsFavorite;
         self->isNewRecipeBeingAdded = FALSE;
         self.Parent = parent;
+        self->currentlyEditingName = FALSE;
+        self->currentlyEditingDesc = FALSE;
     }
     return self;
 }
@@ -53,18 +57,30 @@ static NSString *CellIdentifier = @"Cell";
         
         self->currentIsFav = FALSE;
         self.Parent = parent;
+        self->currentlyEditingName = FALSE;
+        self->currentlyEditingDesc = FALSE;
     }
     return self;
 }
-
+-(void) textFieldDidBeginEditing:(UITextField *)textField {
+    self->currentlyEditingName = TRUE;
+    self->currentlyEditingDesc = TRUE;
+}
+-(void) textViewDidBeginEditing:(UITextView *)textView {
+    self->currentlyEditingName = TRUE;
+    self->currentlyEditingDesc = TRUE;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.txfName.text = self->recipe.Name;
     self.txfName.clearsOnBeginEditing = FALSE;
     self.txfDescription.text = self->recipe.Description;
-    self.txfDescription.clearsOnBeginEditing = FALSE;
-    [self setIsFavImage];
+
+    self.txfDescription.contentInset = UIEdgeInsetsMake(-7,-7,-7,-7);
+    
+    UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"body-bg.png"]];
+    self.view.backgroundColor = background;
     
     if(self->isNewRecipeBeingAdded) {
         UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -76,12 +92,60 @@ static NSString *CellIdentifier = @"Cell";
         self.navBar.titleView = addButton;
     }
     
-    [self.btnback setTitle:@"Close" forState:UIControlStateNormal];
+
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:tap];
+    [self addButtons];
+    [self setIsFavImage];
+}
+-(void)addButtons {
+    float xCloseRecipe = self->isNewRecipeBeingAdded ? 80.0 : 20.0;
+    UIImage *plusButtonBgImage = [[UIImage imageNamed:@"button-transparent-bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)];
+    
+    //addRecipe button
+    if (self->isNewRecipeBeingAdded) {
+        UIButton *buttonAddRecipe = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [buttonAddRecipe addTarget:self action:@selector(AddRecipe) forControlEvents:UIControlEventTouchDown];
+        [buttonAddRecipe setBackgroundImage:plusButtonBgImage forState:UIControlStateNormal];
+        [buttonAddRecipe setTitle:@"add" forState:UIControlStateNormal];
+        [buttonAddRecipe setTitleColor:[UIColor colorWithRed:132.0/255.0f green:132.0/255.0f blue:132.0/255.0f alpha:1] forState:UIControlStateNormal];
+        [buttonAddRecipe setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [buttonAddRecipe.titleLabel setShadowOffset:CGSizeMake(0.0f, 1.0f) ];
+        buttonAddRecipe.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+        buttonAddRecipe.frame = CGRectMake(20.0, 10.0, 50.0, 30.0);
+        [self.view addSubview:buttonAddRecipe];
+    }
+    
+    //add close button
+    UIButton *buttonClose = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [buttonClose addTarget:self action:@selector(CloseRecipe) forControlEvents:UIControlEventTouchDown];
+    [buttonClose setBackgroundImage:plusButtonBgImage forState:UIControlStateNormal];
+    [buttonClose setTitle:@"close" forState:UIControlStateNormal];
+    [buttonClose setTitleColor:[UIColor colorWithRed:132.0/255.0f green:132.0/255.0f blue:132.0/255.0f alpha:1] forState:UIControlStateNormal];
+    [buttonClose setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [buttonClose.titleLabel setShadowOffset:CGSizeMake(0.0f, 1.0f) ];
+    buttonClose.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+    buttonClose.frame = CGRectMake(xCloseRecipe, 10.0, 50.0, 30.0);
+    [self.view addSubview:buttonClose];
+    
+    //fav button
+    self.favIconBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.favIconBtn addTarget:self action:@selector(setFav) forControlEvents:UIControlEventTouchDown];
+    self.favIconBtn.frame = CGRectMake(278.0, 18.5, 17.5, 17.5);
+    //favIconBtn.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"star_disabled_brushed.png"]];
+    UIImage *favIconImageNormal = [UIImage imageNamed:@"star_disabled_brushed.png"];
+    UIImage *favIconImagePressed = [UIImage imageNamed:@"star_enabled_brushed.png"];
+    [self.favIconBtn setBackgroundImage:favIconImageNormal forState:UIControlStateNormal];
+    [self.favIconBtn setBackgroundImage:favIconImagePressed forState:UIControlStateSelected];
+
+    [self.view addSubview:self.favIconBtn];
+  
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20.0, 50.0, 280.0, 1)];
+    [line setBackgroundColor:[UIColor colorWithRed:0.0/255.0f green:0.0/255.0f blue:0.0/255.0f alpha:0.1]];
+    [self.view addSubview:line];
 }
 -(void)dismissKeyboard {
     [self.txfName resignFirstResponder];
@@ -105,14 +169,22 @@ static NSString *CellIdentifier = @"Cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    tableView.separatorColor = [UIColor colorWithRed:219.0/255.0f green:219.0/255.0f blue:219.0/255.0f alpha:0.5];
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
+        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"table-products-bg.png"]];
+        cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
     }
     MIngredientWithAmount* ingredient = [ingredientsForRecipe objectAtIndex:indexPath.row] ;
     cell.textLabel.text = [[ingredient Ingredient] Name];
     return cell;
+}
+
+- (IBAction)editAction:(id)sender {
+    [self.ingredientsTable setEditing:YES animated:YES];
 }
 
 - (float)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -132,17 +204,36 @@ static NSString *CellIdentifier = @"Cell";
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    if(textField.tag == 10) {
-        if(!isNewRecipeBeingAdded) {
-            [[MRecipes Instance] updateRecipeName:textField.text InRecipe:self->recipe.Id];
-        }
-    } else if(textField.tag == 11) {
-        if(!isNewRecipeBeingAdded) {
-            [[MRecipes Instance] updateRecipeDescription:textField.text InRecipe:self->recipe.Id];
-        }	
+- (void) updateName
+{
+    if(self->currentlyEditingName)
+    {
+        self->currentlyEditingName = FALSE;
+            if(!isNewRecipeBeingAdded)
+            {
+                [[MRecipes Instance] updateRecipeName:self.txfName.text InRecipe:self->recipe.Id];
+            }
     }
 }
+
+-(void) updateDesc
+{
+    if(self->currentlyEditingDesc) {
+        self->currentlyEditingDesc = FALSE;
+            if(!isNewRecipeBeingAdded)
+            {
+                [[MRecipes Instance] updateRecipeDescription:self.txfDescription.text InRecipe:self->recipe.Id];
+    }
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self updateName];
+    
+}
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    [self updateDesc];
+    }
 - (void)AddRecipe {
     if(self->isNewRecipeBeingAdded) {
         if(self.txfName.text.length == 0) {
@@ -176,8 +267,18 @@ static NSString *CellIdentifier = @"Cell";
     // if this is a "add new recipe" - run the add operation on db
     [self.navigationController popViewControllerAnimated:YES];
 }
-- (IBAction)CloseRecipe:(id)sender {
+
+- (void)CloseRecipe {
+    
+    if (self->currentlyEditingName == TRUE) {
+        [self updateName];
+    }
+    if (self->currentlyEditingDesc == TRUE) {
+        [self updateDesc];
+    }
+    NSLog(@"Name state %d", self.txfName.state);
     [self.navigationController popViewControllerAnimated:YES];
+    [self.Parent ChildIsUnloading];
 }
 - (IBAction)addNewIngredientClick:(id)sender {
     [self dismissKeyboard];
@@ -186,9 +287,10 @@ static NSString *CellIdentifier = @"Cell";
                                                                                                    Parent:self];
     //Push new view to navigationController stack
     [self.navigationController pushViewController:listOfIngredientsController animated:YES];
+
 }
 
-- (IBAction)setFav:(id)sender {
+- (void)setFav {
     if(!isNewRecipeBeingAdded)
     {
         NSInteger recipeId = self->recipe.Id;
@@ -206,11 +308,7 @@ static NSString *CellIdentifier = @"Cell";
 
 -(void) setIsFavImage
 {
-    if(self->currentIsFav) {
-        [self.isFavButton setBackgroundImage:[UIImage imageNamed: @"star_enabled_brushed.png"] forState:UIControlStateNormal];
-    } else {
-        [self.isFavButton setBackgroundImage:[UIImage imageNamed: @"star_disabled_brushed.png"] forState:UIControlStateNormal];
-    }
+    self.favIconBtn.selected = self->currentIsFav;
 }
 
 - (void)viewDidUnload {
@@ -224,6 +322,7 @@ static NSString *CellIdentifier = @"Cell";
 {
     if(!isNewRecipeBeingAdded) {
         [[MRecipes Instance] addIngredient:ingredient toRecipeWithId:self->recipe.Id];
+        self->ingredientsForRecipe = [NSMutableArray arrayWithArray:[[MRecipes Instance] getRecipeWithIngredientsForId:recipe.Id].Ingredients];
     }
     else {
         [self->ingredientsForRecipe addObject:ingredient];

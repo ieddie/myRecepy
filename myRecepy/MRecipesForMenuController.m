@@ -9,6 +9,7 @@
 #import "MRecipesForMenuController.h"
 #import "MMenuController.h"
 #import "MShoppingCart.h"
+#import "MRecipeCell.h"
 
 @interface MRecipesForMenuController ()
 {
@@ -32,6 +33,7 @@ static NSString *CellIdentifier = @"Cell";
     if (self) {
         topLayerHidden = FALSE;
         [self getAllMenus];
+        
         if(menus.count > 1)
         {
             self->currentMenu = [menus objectAtIndex:0];
@@ -56,7 +58,14 @@ static NSString *CellIdentifier = @"Cell";
     
     [self addNavigationButtons];
     
-    }
+    self.topLayer.layer.shadowOffset = CGSizeMake(0, 0);
+    self.topLayer.layer.shadowRadius = 7;
+    self.topLayer.layer.shadowOpacity = .4;
+    self.topLayer.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.topLayer.bounds].CGPath;
+    
+    UIImage *navBackgroundImage = [UIImage imageNamed:@"nav-light-bg.png"];
+    [_navigationBarMenu setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -74,28 +83,72 @@ static NSString *CellIdentifier = @"Cell";
     if(tableView.tag == 11) {
         return [self->menus count];
     } else if(tableView.tag == 10) {
+        if ([self->recipesForThisMenu count] == 0) {
+            UIColor *tableViewBackgroundImage = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-empty-table-rec.png"]];
+            [tableView setBackgroundColor:tableViewBackgroundImage];
+        } else {
+            UIColor *tableViewBackgroundImage = [UIColor colorWithPatternImage:[UIImage imageNamed:@"body-bg.png"]];
+            [tableView setBackgroundColor:tableViewBackgroundImage];
+
+        }
         return [self->recipesForThisMenu count];
     }
     else {
         return 0;
     }
 }
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grey.png"]];
+    
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:CellIdentifier];
+    MRecipeCell *recipeCell;
+    UITableViewCell *menuCell;
+    
+    if (tableView.tag == 10) {
+        recipeCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (recipeCell == nil) {
+            recipeCell = [[MRecipeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+    } else if (tableView.tag == 11) {
+
+        menuCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+        if (menuCell == nil) {
+            menuCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            menuCell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"table-menus-bg.png"]];
+            menuCell.textLabel.backgroundColor = [UIColor clearColor];
+            menuCell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
+        }
     }
     if(tableView.tag == 11) {
-        cell.textLabel.text = [[self->menus objectAtIndex:indexPath.row] Name];
+        menuCell.textLabel.text = [[self->menus objectAtIndex:indexPath.row] Name];
     } else if(tableView.tag == 10) {
-        cell.textLabel.text = [[self->recipesForThisMenu objectAtIndex:indexPath.row] Name];
+        recipeCell.mainLabel.text = [[self->recipesForThisMenu objectAtIndex:indexPath.row] Name];
+        recipeCell.secondLabel.text = [[self->recipesForThisMenu objectAtIndex:indexPath.row] Description];
+        if([[self->recipesForThisMenu objectAtIndex:indexPath.row] IsFavorite] ) {
+            //favIcon.image = [UIImage imageNamed:@"star_enabled_brushed.png"];
+            recipeCell.favIconBtn.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"star_enabled_brushed.png"]];
+        } else {
+            //favIcon.image = [UIImage imageNamed:@"star_disabled_brushed.png"];
+            recipeCell.favIconBtn.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"star_disabled_brushed.png"]];
+        }
+        //[recipeCell customAddSubview];
     }
-    return cell;
+    
+    return tableView.tag == 11 ?  menuCell : recipeCell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView.tag == 10) {
+        return  55;
+    }
+    return 39;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(tableView.tag == 11) {
@@ -107,7 +160,7 @@ static NSString *CellIdentifier = @"Cell";
         if(self->currentMenu.Id == -1) {
             self->hidingNavItemsForFavorites = TRUE;
             UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
-            currentItem.rightBarButtonItem = nil;
+            currentItem.rightBarButtonItems = nil;
             self->recipesForThisMenu = [[MRecipes Instance] FavoriteRecipes];
         } else {
             if(self->hidingNavItemsForFavorites)
@@ -181,31 +234,39 @@ static NSString *CellIdentifier = @"Cell";
     tools.barStyle = -1; // clear background
     
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:3];
-    
-    UIBarButtonItem* buttonPlus = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                target:self
-                                                                                action:@selector(AddExistingRecipe)];
-    [buttons addObject:buttonPlus];
-    
-    // Create a spacer.
-    UIBarButtonItem* spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                                                            target:nil
-                                                                            action:nil];
-    spacer.width = 12.0f;
-    [buttons addObject:spacer];
-    
+
+
     UIBarButtonItem *buttonShoppingBag = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shopping_bag.png"]
-                                                                          style:UIBarButtonItemStylePlain
+                                                                         style:UIBarButtonSystemItemAdd
                                                                          target:self
                                                                          action:@selector(ShowShoppingBag)];
+    
     [buttons addObject:buttonShoppingBag];
     
+    UIBarButtonItem *buttonPlus = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"btn-add.png"]
+                                                                   style:UIBarButtonSystemItemAdd
+                                                                  target:self
+                                                                  action:@selector(AddExistingRecipe)];
+    UIImage *plusButtonBgImage = [[UIImage imageNamed:@"button-green-bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)];
+    [buttonPlus setBackgroundImage:plusButtonBgImage forState:UIControlStateNormal barMetrics:UIBarButtonSystemItemCamera];
+    
+    [buttons addObject:buttonPlus];
+
+    
+    UIBarButtonItem *buttonMainMenu = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ico-main-menu.png"]
+                                                                          style:UIBarButtonSystemItemAdd
+                                                                         target:self
+                                                                         action:@selector(FaceButtonClicked)];
+    
     // Add buttons to toolbar and toolbar to nav bar.
+    /*
     [tools setItems:buttons animated:NO];
     
     UIBarButtonItem *allButtonsInOne = [[UIBarButtonItem alloc] initWithCustomView:tools];
+     */
     UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
-    currentItem.rightBarButtonItem = allButtonsInOne;
+    currentItem.rightBarButtonItems = buttons;
+    currentItem.leftBarButtonItem = buttonMainMenu;
 }
 
 - (IBAction)AddMenuClicked:(id)sender {
@@ -213,7 +274,7 @@ static NSString *CellIdentifier = @"Cell";
     addMenu.parent = self;
     [self.navigationController pushViewController:addMenu animated:YES];
 }
-- (IBAction)FaceButtonClicked:(id)sender {
+- (void)FaceButtonClicked {
     if(topLayerHidden) {
         [self animateLayer:0];
     } else {
@@ -221,6 +282,7 @@ static NSString *CellIdentifier = @"Cell";
     }
     topLayerHidden = !topLayerHidden;
 }
+
 
 - (void) getAllMenus
 {

@@ -49,17 +49,29 @@ static NSString *CellIdentifier = @"Cell";
     self.navigationBar.topItem.title = @"Recipes";
 
     // these numbers would not work for iPad, need to take idiom into effect
+    /*
     UIToolbar *tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 40.0f, 44.0f)];
     tools.clearsContextBeforeDrawing = NO;
     tools.clipsToBounds = NO;
     tools.barStyle = -1; // clear background
-    
+    */
     NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:3];
-    
+    /*
     UIBarButtonItem* buttonPlus = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                 target:self
                                                                                 action:@selector(AddNewRecipe)];
+    */
+    UIBarButtonItem *buttonPlus = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"btn-add.png"]
+                                                                   style:UIBarButtonSystemItemAdd
+                                                                  target:self
+                                                                  action:@selector(AddNewRecipe)];
+    UIImage *plusButtonBgImage = [[UIImage imageNamed:@"button-green-bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)];
+    [buttonPlus setBackgroundImage:plusButtonBgImage forState:UIControlStateNormal barMetrics:UIBarButtonSystemItemCamera];
+    
     [buttons addObject:buttonPlus];
+    
+    UIBarButtonItem* buttonBack = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain                                                                            target:self action:@selector(backButtonClicked)];
+    
     /* For now removing shopping bag from this view. change size of rectangle to 0, 0, 80, 40
     // Create a spacer.
     UIBarButtonItem* spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
@@ -76,11 +88,12 @@ static NSString *CellIdentifier = @"Cell";
      */
     
     // Add buttons to toolbar and toolbar to nav bar.
-    [tools setItems:buttons animated:NO];
+    //[tools setItems:buttons animated:NO];
     
-    UIBarButtonItem *allButtonsInOne = [[UIBarButtonItem alloc] initWithCustomView:tools];
+    //UIBarButtonItem *allButtonsInOne = [[UIBarButtonItem alloc] initWithCustomView:tools];
     UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
-    currentItem.rightBarButtonItem = allButtonsInOne;
+    currentItem.rightBarButtonItems = buttons;
+    currentItem.leftBarButtonItem = buttonBack;
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,7 +149,7 @@ static NSString *CellIdentifier = @"Cell";
                                          animated:YES];
 }
 
-- (IBAction)BackClicked:(id)sender {
+- (void)backButtonClicked {
     [self.navigationController popViewControllerAnimated:YES];
 }
 

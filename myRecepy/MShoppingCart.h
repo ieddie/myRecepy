@@ -10,6 +10,7 @@
 
 @interface MShoppingCart : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *shoppingCartTableView;
+@property (weak, nonatomic) IBOutlet UINavigationBar* navigationBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil Menu:(NSInteger)menuId;
 
