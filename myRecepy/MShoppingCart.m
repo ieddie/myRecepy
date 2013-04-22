@@ -74,16 +74,17 @@ static NSString *CellIdentifier = @"Cell";
                                  };
     UIImageView *favIcon;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (cell == nil)
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
         cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"table-products-bg.png"]];
         cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
-        
-        favIcon = [[UIImageView alloc] initWithFrame:CGRectMake(271, 12, 16.5, 14.5)];
-        favIcon.tag = 12;
-        [cell.contentView addSubview:favIcon];
     }
+    favIcon = [[UIImageView alloc] initWithFrame:CGRectMake(271, 12, 16.5, 14.5)];
+    favIcon.tag = 12;
+    [cell.contentView addSubview:favIcon];
+
     MIngredientFromRecipeInMenu* ingredient = nil;
     if(indexPath.section == 0) {
         ingredient = [self->notBought objectAtIndex:indexPath.row];
