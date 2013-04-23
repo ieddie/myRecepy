@@ -73,6 +73,9 @@ static NSString *CellIdentifier = @"Cell";
                                  NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
                                  };
     UIImageView *favIcon;
+    UIImage *favIconImageNormal = [UIImage imageNamed:@"products-checkbox.png"];
+    UIImage *favIconImagePressed = [UIImage imageNamed:@"products-checkbox-checked.png"];
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
@@ -80,30 +83,31 @@ static NSString *CellIdentifier = @"Cell";
                                       reuseIdentifier:CellIdentifier];
         cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"table-products-bg.png"]];
         cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
+        
+        favIcon = [[UIImageView alloc] initWithFrame:CGRectMake(271, 12, 16.5, 14.5)];
+        cell.accessoryView = favIcon;
     }
-    favIcon = [[UIImageView alloc] initWithFrame:CGRectMake(271, 12, 16.5, 14.5)];
-    favIcon.tag = 12;
-    [cell.contentView addSubview:favIcon];
 
     MIngredientFromRecipeInMenu* ingredient = nil;
     if(indexPath.section == 0) {
         ingredient = [self->notBought objectAtIndex:indexPath.row];
         if(ingredient != nil)
-        {            
-            favIcon.image = [UIImage imageNamed:@"products-checkbox.png"];
+        {
+            [cell.accessoryView setBackgroundColor:[UIColor colorWithPatternImage:favIconImageNormal]];
             cell.textLabel.text = ingredient.Ingredient.Ingredient.Name;
         }
-    } else  {
+    } else if(indexPath.section == 1)  {
         ingredient = [self->bought objectAtIndex:indexPath.row];
         if(ingredient != nil)
         {
-            favIcon.image = [UIImage imageNamed:@"products-checkbox-checked.png"];
+            [cell.accessoryView setBackgroundColor:[UIColor colorWithPatternImage:favIconImagePressed]];
             NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:ingredient.Ingredient.Ingredient.Name attributes:strikeThrough];
             cell.textLabel.attributedText = attrText;
         }
     }
     return cell;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return  39;
