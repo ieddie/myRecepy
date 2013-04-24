@@ -11,6 +11,8 @@
 @interface MShoppingCart : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *shoppingCartTableView;
 @property (weak, nonatomic) IBOutlet UINavigationBar* navigationBar;
+@property (weak, nonatomic) IBOutlet UITableView *shoppingListTableView;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil Menu:(NSInteger)menuId;
 

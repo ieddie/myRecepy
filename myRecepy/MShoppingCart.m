@@ -41,7 +41,7 @@ static NSDictionary* strikeThrough;
 {
     [super viewDidLoad];
     [self addNavigationButtons];
-    
+    self.shoppingCartTableView.separatorColor = [UIColor colorWithRed:219.0/255.0f green:219.0/255.0f blue:219.0/255.0f alpha:0.5];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +53,7 @@ static NSDictionary* strikeThrough;
 
 - (void)viewDidUnload {
     [self setShoppingCartTableView:nil];
+    [self setShoppingListTableView:nil];
     [super viewDidUnload];
 }
 
@@ -72,7 +73,6 @@ static NSDictionary* strikeThrough;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    tableView.separatorColor = [UIColor colorWithRed:219.0/255.0f green:219.0/255.0f blue:219.0/255.0f alpha:0.5];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
@@ -84,22 +84,21 @@ static NSDictionary* strikeThrough;
         cell.accessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(271, 12, 16.5, 14.5)];
     }
 
-    MIngredientFromRecipeInMenu* ingredient;
     if(indexPath.section == 0) {
-        ingredient = [self->notBought objectAtIndex:indexPath.row];
-        if(ingredient != nil)
+        MIngredientFromRecipeInMenu* ingredientNotBought = [self->notBought objectAtIndex:indexPath.row];
+        if(ingredientNotBought != nil)
         {
             UIImage *favIconImageNormal = [UIImage imageNamed:@"products-checkbox.png"];
             [cell.accessoryView setBackgroundColor:[UIColor colorWithPatternImage:favIconImageNormal]];
-            cell.textLabel.text = ingredient.Ingredient.Ingredient.Name;
+            cell.textLabel.text = ingredientNotBought.Ingredient.Ingredient.Name;
         }
     } else if(indexPath.section == 1)  {
-        ingredient = [self->bought objectAtIndex:indexPath.row];
-        if(ingredient != nil)
+        MIngredientFromRecipeInMenu* ingredientBought = [self->bought objectAtIndex:indexPath.row];
+        if(ingredientBought != nil)
         {
             UIImage *favIconImagePressed = [UIImage imageNamed:@"products-checkbox-checked.png"];
             [cell.accessoryView setBackgroundColor:[UIColor colorWithPatternImage:favIconImagePressed]];
-            NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:ingredient.Ingredient.Ingredient.Name
+            NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:ingredientBought.Ingredient.Ingredient.Name
                                                                            attributes:strikeThrough];
             cell.textLabel.attributedText = attrText;
         }
