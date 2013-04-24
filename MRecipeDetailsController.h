@@ -32,7 +32,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 - (IBAction)editAction:(id)sender;
-- (IBAction)CloseRecipe:(id)sender;
 - (void)setFav;
 
 - (void) AddNewIngredient:(id)ingredient;

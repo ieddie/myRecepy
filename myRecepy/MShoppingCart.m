@@ -20,11 +20,16 @@
 @implementation MShoppingCart
 
 static NSString *CellIdentifier = @"Cell";
+static NSDictionary* strikeThrough;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil Menu:(NSInteger)MenuId
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        if(strikeThrough == nil) {
+            // initialize just once
+            strikeThrough = @{ NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle] };
+        }
         self->menuId = MenuId;
         self->bought = [[MMenus Instance] getBoughtIngredientsForMenuId:menuId];
         self->notBought = [[MMenus Instance] getNotBoughtIngredientsForMenuId:menuId];
@@ -68,14 +73,6 @@ static NSString *CellIdentifier = @"Cell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     tableView.separatorColor = [UIColor colorWithRed:219.0/255.0f green:219.0/255.0f blue:219.0/255.0f alpha:0.5];
-    //tableView.separatorColor = [UIColor clearColor];
-    NSDictionary* strikeThrough = @{
-                                 NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
-                                 };
-    UIImageView *favIcon;
-    UIImage *favIconImageNormal = [UIImage imageNamed:@"products-checkbox.png"];
-    UIImage *favIconImagePressed = [UIImage imageNamed:@"products-checkbox-checked.png"];
-
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
@@ -84,15 +81,15 @@ static NSString *CellIdentifier = @"Cell";
         cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"table-products-bg.png"]];
         cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         
-        favIcon = [[UIImageView alloc] initWithFrame:CGRectMake(271, 12, 16.5, 14.5)];
-        cell.accessoryView = favIcon;
+        cell.accessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(271, 12, 16.5, 14.5)];
     }
 
-    MIngredientFromRecipeInMenu* ingredient = nil;
+    MIngredientFromRecipeInMenu* ingredient;
     if(indexPath.section == 0) {
         ingredient = [self->notBought objectAtIndex:indexPath.row];
         if(ingredient != nil)
         {
+            UIImage *favIconImageNormal = [UIImage imageNamed:@"products-checkbox.png"];
             [cell.accessoryView setBackgroundColor:[UIColor colorWithPatternImage:favIconImageNormal]];
             cell.textLabel.text = ingredient.Ingredient.Ingredient.Name;
         }
@@ -100,8 +97,10 @@ static NSString *CellIdentifier = @"Cell";
         ingredient = [self->bought objectAtIndex:indexPath.row];
         if(ingredient != nil)
         {
+            UIImage *favIconImagePressed = [UIImage imageNamed:@"products-checkbox-checked.png"];
             [cell.accessoryView setBackgroundColor:[UIColor colorWithPatternImage:favIconImagePressed]];
-            NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:ingredient.Ingredient.Ingredient.Name attributes:strikeThrough];
+            NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:ingredient.Ingredient.Ingredient.Name
+                                                                           attributes:strikeThrough];
             cell.textLabel.attributedText = attrText;
         }
     }
