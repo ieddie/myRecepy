@@ -55,7 +55,7 @@ static NSString *CellIdentifier = @"Cell";
     
     self.navigationBar.topItem.title = self->currentMenu.Name;
     self.lblDescription.text = self->currentMenu.Description;
-    
+
     [self addNavigationButtons];
     
     self.topLayer.layer.shadowOffset = CGSizeMake(0, 0);
@@ -65,6 +65,13 @@ static NSString *CellIdentifier = @"Cell";
     
     UIImage *navBackgroundImage = [UIImage imageNamed:@"nav-light-bg.png"];
     [_navigationBarMenu setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
+    
+    self.navigationBarMenu.layer.masksToBounds = NO;
+    self.navigationBarMenu.layer.shadowOffset = CGSizeMake(0, 0);
+    self.navigationBarMenu.layer.shadowRadius = 3;
+    self.navigationBarMenu.layer.shadowOpacity = .3;
+    self.navigationBarMenu.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.navigationBarMenu.bounds].CGPath;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,6 +129,10 @@ static NSString *CellIdentifier = @"Cell";
             menuCell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"table-menus-bg.png"]];
             menuCell.textLabel.backgroundColor = [UIColor clearColor];
             menuCell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
+            
+            UIView *bgColorView = [[UIView alloc] init];
+            [bgColorView setBackgroundColor:[UIColor colorWithRed:58.0/255.0f green:62.0/255.0f blue:64.0/255.0f alpha:1]];
+            [menuCell setSelectedBackgroundView:bgColorView];
         }
     }
     if(tableView.tag == 11) {
@@ -259,17 +270,24 @@ static NSString *CellIdentifier = @"Cell";
                                                                          action:@selector(FaceButtonClicked)];
     
     // Add buttons to toolbar and toolbar to nav bar.
-    /*
-    [tools setItems:buttons animated:NO];
-    
-    UIBarButtonItem *allButtonsInOne = [[UIBarButtonItem alloc] initWithCustomView:tools];
-     */
     UINavigationItem* currentItem = [self.navigationBar.items objectAtIndex:0];
     currentItem.rightBarButtonItems = buttons;
     currentItem.leftBarButtonItem = buttonMainMenu;
+
+    //add button to navigationBarMenu
+    UIBarButtonItem *addMenuBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"btn-add-menu.png"]
+                                                                   style:UIBarButtonSystemItemAdd
+                                                                  target:self
+                                                                  action:@selector(AddMenuClicked)];
+    UIImage *addMenuBtnBg = [[UIImage imageNamed:@"button2-bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)];
+    [addMenuBtn setBackgroundImage:addMenuBtnBg forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    
+    UINavigationItem *currentMenuBarItem = [self.navigationBarMenu.items objectAtIndex:0];
+    currentMenuBarItem.leftBarButtonItem = addMenuBtn;
 }
 
-- (IBAction)AddMenuClicked:(id)sender {
+- (IBAction)AddMenuClicked {
     MMenuController* addMenu = [[MMenuController alloc] initWithNibName:@"MMenuController" bundle:nil];
     addMenu.parent = self;
     [self.navigationController pushViewController:addMenu animated:YES];

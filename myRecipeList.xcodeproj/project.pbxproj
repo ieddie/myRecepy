@@ -76,6 +76,10 @@
 		A5A06AD3171B3EF800F30E62 /* button-transparent-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5A06AD1171B3EF800F30E62 /* button-transparent-bg@2x.png */; };
 		A5A06AD5171B4E7A00F30E62 /* MRecipeDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5A06AD4171B4E7A00F30E62 /* MRecipeDetailsController.xib */; };
 		A5A06AD7171B87D800F30E62 /* Dakota Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A5A06AD6171B87D700F30E62 /* Dakota Regular.ttf */; };
+		A5A9BEB7172A0E7D00651620 /* btn-add-menu.png in Resources */ = {isa = PBXBuildFile; fileRef = A5A9BEB6172A0E7D00651620 /* btn-add-menu.png */; };
+		A5A9BEB9172A0E9F00651620 /* btn-add-menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5A9BEB8172A0E9F00651620 /* btn-add-menu@2x.png */; };
+		A5A9BEBC172A0F9800651620 /* button2-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = A5A9BEBA172A0F9800651620 /* button2-bg.png */; };
+		A5A9BEBD172A0F9800651620 /* button2-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5A9BEBB172A0F9800651620 /* button2-bg@2x.png */; };
 		A5AA951B17162E820052FE06 /* table-products-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = A5AA951917162E820052FE06 /* table-products-bg.png */; };
 		A5AA951C17162E820052FE06 /* table-products-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5AA951A17162E820052FE06 /* table-products-bg@2x.png */; };
 		A5DE20141714B6B00081587A /* button-green-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = A5DE20121714B6B00081587A /* button-green-bg.png */; };
@@ -204,6 +208,10 @@
 		A5A06AD1171B3EF800F30E62 /* button-transparent-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-transparent-bg@2x.png"; sourceTree = "<group>"; };
 		A5A06AD4171B4E7A00F30E62 /* MRecipeDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MRecipeDetailsController.xib; sourceTree = SOURCE_ROOT; };
 		A5A06AD6171B87D700F30E62 /* Dakota Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dakota Regular.ttf"; sourceTree = "<group>"; };
+		A5A9BEB6172A0E7D00651620 /* btn-add-menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-add-menu.png"; sourceTree = "<group>"; };
+		A5A9BEB8172A0E9F00651620 /* btn-add-menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-add-menu@2x.png"; sourceTree = "<group>"; };
+		A5A9BEBA172A0F9800651620 /* button2-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button2-bg.png"; sourceTree = "<group>"; };
+		A5A9BEBB172A0F9800651620 /* button2-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button2-bg@2x.png"; sourceTree = "<group>"; };
 		A5AA951917162E820052FE06 /* table-products-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "table-products-bg.png"; sourceTree = "<group>"; };
 		A5AA951A17162E820052FE06 /* table-products-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "table-products-bg@2x.png"; sourceTree = "<group>"; };
 		A5DE20121714B6B00081587A /* button-green-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-green-bg.png"; sourceTree = "<group>"; };
@@ -351,6 +359,10 @@
 		8DDF6A7C169B27BE002019C0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A5A9BEBA172A0F9800651620 /* button2-bg.png */,
+				A5A9BEBB172A0F9800651620 /* button2-bg@2x.png */,
+				A5A9BEB8172A0E9F00651620 /* btn-add-menu@2x.png */,
+				A5A9BEB6172A0E7D00651620 /* btn-add-menu.png */,
 				A58600501720C51D0098750F /* table-menus-bg.png */,
 				A58600511720C51D0098750F /* table-menus-bg@2x.png */,
 				A5245E52171E33FB00C733E7 /* nav-light-bg.png */,
@@ -564,6 +576,10 @@
 				A5245E55171E33FB00C733E7 /* nav-light-bg@2x.png in Resources */,
 				A58600521720C51D0098750F /* table-menus-bg.png in Resources */,
 				A58600531720C51D0098750F /* table-menus-bg@2x.png in Resources */,
+				A5A9BEB7172A0E7D00651620 /* btn-add-menu.png in Resources */,
+				A5A9BEB9172A0E9F00651620 /* btn-add-menu@2x.png in Resources */,
+				A5A9BEBC172A0F9800651620 /* button2-bg.png in Resources */,
+				A5A9BEBD172A0F9800651620 /* button2-bg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
