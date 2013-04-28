@@ -15,6 +15,7 @@
 {
     NSArray* recipesForThisMenu;
     MMenu* currentMenu;
+    NSIndexPath *oldIndexPath;
     
     NSArray* menus;
     BOOL topLayerHidden;
@@ -37,6 +38,7 @@ static NSString *CellIdentifier = @"Cell";
         if(menus.count > 1)
         {
             self->currentMenu = [menus objectAtIndex:0];
+            oldIndexPath = [menus objectAtIndex:0];
             self->recipesForThisMenu = [[MMenus Instance] getRecipesForMenuId:currentMenu.Id];
         }
     }
@@ -71,6 +73,9 @@ static NSString *CellIdentifier = @"Cell";
     self.navigationBarMenu.layer.shadowRadius = 3;
     self.navigationBarMenu.layer.shadowOpacity = .3;
     self.navigationBarMenu.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.navigationBarMenu.bounds].CGPath;
+    
+    oldIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.menusTableView selectRowAtIndexPath:oldIndexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
     
 }
 
@@ -133,6 +138,9 @@ static NSString *CellIdentifier = @"Cell";
             UIView *bgColorView = [[UIView alloc] init];
             [bgColorView setBackgroundColor:[UIColor colorWithRed:58.0/255.0f green:62.0/255.0f blue:64.0/255.0f alpha:1]];
             [menuCell setSelectedBackgroundView:bgColorView];
+            
+            UIImageView *icoListing = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ico-listing.png"]];
+            menuCell.imageView.image = icoListing.image;
         }
     }
     if(tableView.tag == 11) {
@@ -158,7 +166,7 @@ static NSString *CellIdentifier = @"Cell";
     if (tableView.tag == 10) {
         return  55;
     }
-    return 39;
+    return 40;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -185,6 +193,18 @@ static NSString *CellIdentifier = @"Cell";
         self.lblDescription.text = self->currentMenu.Description;
 
         [self.recipesTableView reloadData];
+        
+        UITableViewCell *oldCell= [tableView cellForRowAtIndexPath:oldIndexPath];
+        UIImageView *icoListingDark = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ico-listing.png"]];
+        oldCell.imageView.image = icoListingDark.image;
+        
+        if (oldIndexPath != indexPath) {
+            UITableViewCell *newCell= [tableView cellForRowAtIndexPath:indexPath];
+            UIImageView *icoListingLight = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ico-listing-light.png"]];
+            newCell.imageView.image = icoListingLight.image;
+            oldIndexPath = indexPath;
+        }
+        
     } else {
         MRecipe* recipe = [self->recipesForThisMenu objectAtIndex:indexPath.row];
         //Initialize new viewController

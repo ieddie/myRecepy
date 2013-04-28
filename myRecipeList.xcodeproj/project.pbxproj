@@ -64,6 +64,10 @@
 		A5245E54171E33FB00C733E7 /* nav-light-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = A5245E52171E33FB00C733E7 /* nav-light-bg.png */; };
 		A5245E55171E33FB00C733E7 /* nav-light-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5245E53171E33FB00C733E7 /* nav-light-bg@2x.png */; };
 		A52FD7DB172352D9003978B9 /* MRecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A52FD7DA172352D9003978B9 /* MRecipeCell.m */; };
+		A53719F9172B5682009B7F50 /* ico-listing.png in Resources */ = {isa = PBXBuildFile; fileRef = A53719F7172B5682009B7F50 /* ico-listing.png */; };
+		A53719FA172B5682009B7F50 /* ico-listing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A53719F8172B5682009B7F50 /* ico-listing@2x.png */; };
+		A53719FD172C2F95009B7F50 /* ico-listing-light.png in Resources */ = {isa = PBXBuildFile; fileRef = A53719FB172C2F95009B7F50 /* ico-listing-light.png */; };
+		A53719FE172C2F95009B7F50 /* ico-listing-light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A53719FC172C2F95009B7F50 /* ico-listing-light@2x.png */; };
 		A58600521720C51D0098750F /* table-menus-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = A58600501720C51D0098750F /* table-menus-bg.png */; };
 		A58600531720C51D0098750F /* table-menus-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A58600511720C51D0098750F /* table-menus-bg@2x.png */; };
 		A58C6410171246FD00D4C477 /* nav-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = A58C640F171246FD00D4C477 /* nav-bg.png */; };
@@ -196,6 +200,10 @@
 		A5245E53171E33FB00C733E7 /* nav-light-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-light-bg@2x.png"; sourceTree = "<group>"; };
 		A52FD7D9172352D9003978B9 /* MRecipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRecipeCell.h; sourceTree = "<group>"; };
 		A52FD7DA172352D9003978B9 /* MRecipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRecipeCell.m; sourceTree = "<group>"; };
+		A53719F7172B5682009B7F50 /* ico-listing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico-listing.png"; sourceTree = "<group>"; };
+		A53719F8172B5682009B7F50 /* ico-listing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico-listing@2x.png"; sourceTree = "<group>"; };
+		A53719FB172C2F95009B7F50 /* ico-listing-light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico-listing-light.png"; sourceTree = "<group>"; };
+		A53719FC172C2F95009B7F50 /* ico-listing-light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico-listing-light@2x.png"; sourceTree = "<group>"; };
 		A58600501720C51D0098750F /* table-menus-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "table-menus-bg.png"; sourceTree = "<group>"; };
 		A58600511720C51D0098750F /* table-menus-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "table-menus-bg@2x.png"; sourceTree = "<group>"; };
 		A58C640F171246FD00D4C477 /* nav-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bg.png"; sourceTree = "<group>"; };
@@ -359,6 +367,10 @@
 		8DDF6A7C169B27BE002019C0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A53719FB172C2F95009B7F50 /* ico-listing-light.png */,
+				A53719FC172C2F95009B7F50 /* ico-listing-light@2x.png */,
+				A53719F7172B5682009B7F50 /* ico-listing.png */,
+				A53719F8172B5682009B7F50 /* ico-listing@2x.png */,
 				A5A9BEBA172A0F9800651620 /* button2-bg.png */,
 				A5A9BEBB172A0F9800651620 /* button2-bg@2x.png */,
 				A5A9BEB8172A0E9F00651620 /* btn-add-menu@2x.png */,
@@ -580,6 +592,10 @@
 				A5A9BEB9172A0E9F00651620 /* btn-add-menu@2x.png in Resources */,
 				A5A9BEBC172A0F9800651620 /* button2-bg.png in Resources */,
 				A5A9BEBD172A0F9800651620 /* button2-bg@2x.png in Resources */,
+				A53719F9172B5682009B7F50 /* ico-listing.png in Resources */,
+				A53719FA172B5682009B7F50 /* ico-listing@2x.png in Resources */,
+				A53719FD172C2F95009B7F50 /* ico-listing-light.png in Resources */,
+				A53719FE172C2F95009B7F50 /* ico-listing-light@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
